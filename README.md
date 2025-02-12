@@ -4,7 +4,7 @@
 
 This project is a system that monitors the status of multiple servers with GPUs and displays the status on a web page.
 
-The frontend is implemented in React and Material-UI, and the backend is implemented in Python and Flask.
+The frontend is implemented in React and Material-UI, and the backend is implemented in Python and fastAPI.
 
 # How to build
 
@@ -12,6 +12,14 @@ The frontend is implemented in React and Material-UI, and the backend is impleme
 $ cd <project root path>
 $ npm run build
 ```
+
+## Change App Title
+You can change the title of the web page by changing `REACT_APP_TITLE` in the `.env` and `.env.production` files.
+
+```shell
+REACT_APP_TITLE=AQUARIUM
+```
+
 
 # How to deploy
 This project can be deployed to NGINX server.

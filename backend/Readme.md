@@ -26,6 +26,19 @@ The DB script is a script that merges the data collected by the data collection 
 $ python db.py
 ```
 
+In order to configure the servers displayed on the dashboard, please edit `config.yaml`.
+
+Example:
+```yaml
+server:
+  host1:
+    gpu: RTX A6000
+    status: operational
+  host2-down:
+    gpu: Tesla A100
+    status: down
+```
+
 ### Data collection script
 The data collection script `get_server_info.py` is a script that collects the data from the servers and stores it in JSON files.
 You need to run this script on each server.
