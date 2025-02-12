@@ -1,0 +1,15 @@
+# Example of config.yaml
+config:
+  status:
+  - operational
+  - down
+  - suspend
+  - error
+  - hidden
+server:
+  host1:
+    gpu: RTX A6000
+    status: operational
+  host2-down:
+    gpu: Tesla A100
+    status: down

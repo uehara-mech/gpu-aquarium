@@ -1,0 +1,16 @@
+[project]
+name = "aquarium"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "aiofiles>=24.1.0",
+    "distro>=1.9.0",
+    "fastapi[standard]>=0.115.6",
+    "filelock>=3.16.1",
+    "ping3>=4.0.8",
+    "psutil>=6.1.1",
+    "rich>=13.9.4",
+    "xmltodict>=0.14.2",
+]
