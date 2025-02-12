@@ -10,7 +10,7 @@ dependencies = [
     "fastapi[standard]>=0.115.6",
     "filelock>=3.16.1",
     "ping3>=4.0.8",
-    "psutil>=6.1.1",
+    "psutil==5.9.0",
     "rich>=13.9.4",
     "xmltodict>=0.14.2",
 ]
