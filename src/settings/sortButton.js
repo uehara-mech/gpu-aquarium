@@ -1,7 +1,6 @@
 import React from "react";
-import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import {KeyNameBar, KeyNameGrid, StyledButton} from "./filterButton";
+import {KeyNameBar, StyledButton} from "./filterButton";
 import {useRecoilState} from "recoil";
 import {sortState, sortOptions} from "../atom/atom";
 

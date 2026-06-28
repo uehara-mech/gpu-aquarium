@@ -15,12 +15,10 @@ import {getNodeStats} from "../api";
 export default function NodeStats(props) {
     const [nodeStats, setNodeStats] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [timeRangeStr, setTimeRangeStr] = useState("days");  // seconds, minutes, hours, days
+    const timeRangeStr = "days";  // seconds, minutes, hours, days
     const { name } = useParams();
 
     const theme = useTheme();
-
-    // useLoadSettings();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -63,18 +61,6 @@ export default function NodeStats(props) {
                 )
             }
         }
-
-        // time range: max timestamp - min timestamp
-        // const timeRange = nodeStats["timestamp"][nodeStats["timestamp"].length - 1] - nodeStats["timestamp"][0];
-        // if (timeRange < 60) {
-        //     setTimeRangeStr("seconds")
-        // } else if (timeRange < 60 * 60) {
-        //     setTimeRangeStr("minutes");
-        // } else if (timeRange < 60 * 60 * 24) {
-        //     setTimeRangeStr("hours");
-        // } else {
-        //     setTimeRangeStr("days");
-        // }
 
         console.log('timeRangeStr', timeRangeStr)
 

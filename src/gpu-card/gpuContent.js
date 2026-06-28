@@ -27,7 +27,7 @@ export default function GpuContent(props) {
 
     const serverInfo = props.data;
 
-    const [gpuList, setGpuList] = React.useState([...serverInfo.gpu_info]);
+    const gpuList = serverInfo.gpu_info;
 
     return (
         <div>

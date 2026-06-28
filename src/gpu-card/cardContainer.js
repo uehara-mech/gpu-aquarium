@@ -1,14 +1,13 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 import {selector, useRecoilValue} from "recoil";
-import {FilterState, gpuState, sortDirectionState, sortState, showHiddenNodeState} from "../atom/atom";
+import {FilterState, gpuState, sortDirectionState, sortState} from "../atom/atom";
 
 import GpuCard from './gpuCard';
-import {getMemoryTotal, LoadSettings, StyledWarningAlert, useLoadSettings} from "../utils/utils";
+import {getMemoryTotal, StyledWarningAlert} from "../utils/utils";
 import {calcGpuStatus} from "./gpuDenseIcon";
-import {Alert, Box} from "@mui/material";
+import {Box} from "@mui/material";
 
 const serverStatusCalculator = (serverData) => {
     let serverStatus = {
@@ -29,7 +28,6 @@ const createGpuCard = selector({
         const serverInfo = get(gpuState);
         const filterInfo = get(FilterState);
         const sortInfo = get(sortState)["fixed"];
-        const showHiddenNode = get(showHiddenNodeState)["fixed"];
 
         // sort serverInfo
         // first, copy serverInfo and convert to list
@@ -153,8 +151,6 @@ export default function CardContainer(props) {
     const [gpuCards, serverInfoList] = useRecoilValue(createGpuCard);
 
     console.log(serverInfoList);
-
-    // useLoadSettings();
 
     // divide gpuCards into two columns
     // 1. get sort direction from atom

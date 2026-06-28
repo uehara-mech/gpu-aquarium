@@ -101,7 +101,7 @@ function Root() {
     }, [showHiddenNode, setserverInfo]);
 
     const CardContainerWrapper = () => {
-        const { state, setState } = useData();
+        const { setState } = useData();
         useEffect(() => {
             setState({
                 cardContainerData: serverInfo,

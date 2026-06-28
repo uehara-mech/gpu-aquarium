@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-import {amber, blue, grey, lightBlue, pink} from '@mui/material/colors';
+import {blue, grey, pink} from '@mui/material/colors';
 import {alpha} from "@mui/material";
 
 
@@ -188,47 +188,6 @@ export const getDesignTokens = (mode) => {
 }
 
 const theme = createTheme(getDesignTokens('light'));
-
-const tmptheme = createTheme({
-    typography: {
-        fontFamily: [
-            'Roboto',
-            'Titillium Web'
-        ].join(','),
-    },
-    palette: {
-        // mode: 'default',
-        primary: {
-            main: blue[500],
-        },
-        background: {
-          default: '#f1f2f6',
-        },
-        secondary: pink,
-        gpuHeaderText: "#ffffff",
-        settingButton: "#ffffff",
-        saveButton: "#1976d2",
-        saveButtonHover: "#1976d2b3",
-        settingActive: "#8ddcfe",
-        settingActiveHover: "#7BBDD9",
-        gpuDetailPaper: "#dcdcdc",
-        table: {
-            header: "#dedede",
-            odd: "#FAFAFA",
-            even: "#EFEFEF"
-        },
-        gpuIcon: {
-            free: "#5FC0DD",
-            used: "#EFAC56",
-            alert: "#D75452",
-        },
-        gpuBar: {
-            free: "#e8e8e8",
-            used: "#ffa500"
-        },
-        infoIcon: "#ffffff"
-    },
-});
 
 export const darkTheme = createTheme({
     palette: {

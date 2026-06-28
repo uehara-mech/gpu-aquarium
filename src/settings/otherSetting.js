@@ -1,10 +1,7 @@
 import React from 'react';
-import {selector, useRecoilValue} from "recoil";
-
 
 import DialogContent from '@mui/material/DialogContent';
 
-import FilterButtons from "./filterButton";
 import ThemeButton from "./themeButton";
 import SortButton from "./sortButton";
 import SortDirectionButton from "./sortDirectionButton";

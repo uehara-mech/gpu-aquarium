@@ -1,6 +1,4 @@
-import {FilterState, sortDirectionState, sortState, themeState} from "../atom/atom";
-import {useRecoilState} from "recoil";
-import React, {useEffect} from "react";
+import React from "react";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import {styled} from "@mui/material/styles";
@@ -9,42 +7,6 @@ import {Alert, CircularProgress} from "@mui/material";
 export const getMemoryTotal = (memoryTotal) => {
     let memoryTotalGB = Math.floor(parseInt(memoryTotal) / 1024);
     return memoryTotalGB.toString() + "GB";
-}
-
-
-export function useLoadSettings() {
-    const [colorTheme, setColorTheme] = useRecoilState(themeState);
-    const [sortOption, setSortOption] = useRecoilState(sortState);
-    const [sortDirection, setSortDirection] = useRecoilState(sortDirectionState);
-    const [filterState, setFilterState] = useRecoilState(FilterState)
-
-    useEffect(() => {
-        const storedColorTheme = localStorage.getItem('colorTheme');
-        if (storedColorTheme) {
-            setColorTheme({...colorTheme, "fixed": storedColorTheme["fixed"]});
-            console.log('Stored color data:', storedColorTheme);
-        }
-
-        const storedSortOption = localStorage.getItem('sortOption');
-        if (storedSortOption) {
-            setSortOption({...sortOption, "fixed": storedSortOption["fixed"]});
-            console.log('Stored sort option data:', storedSortOption);
-        }
-
-        const storedSortDirection = localStorage.getItem('sortDirection');
-        if (storedSortDirection) {
-            setSortDirection({...sortDirection, "fixed": storedSortDirection["fixed"]});
-            console.log('Stored sort direction data:', storedSortDirection);
-        }
-
-        const storedFilter = localStorage.getItem('filter');
-        if (storedFilter) {
-            setFilterState({...filterState, "fixed": storedFilter["fixed"]});
-            console.log('Stored filter data:', storedFilter);
-        }
-        console.log('Current state:', colorTheme, sortOption, sortDirection, filterState);
-    }, []);
-
 }
 
 
