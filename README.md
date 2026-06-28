@@ -1,5 +1,7 @@
 # GPU Dashboard system
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-AQUARIUM-0B7CFF?logo=githubpages&logoColor=white&labelColor=101820)](https://uehara-mech.github.io/gpu-aquarium/#/)
+
 <img src="assets/image.png">
 
 This project is a system that monitors the status of multiple servers with GPUs and displays the status on a web page.
