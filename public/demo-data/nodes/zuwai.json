@@ -1,0 +1,71 @@
+{
+  "basic_info": {
+    "os": "Debian GNU/Linux 12",
+    "host_name": "zuwai",
+    "uname": "Linux zuwai 6.1.0-23-amd64 x86_64",
+    "node_cpu_memory_total": "128 GiB",
+    "node_cpu_memory_used": "18 GiB",
+    "node_cpu_swap_total": "4 GiB",
+    "node_cpu_swap_used": "0 GiB",
+    "cpu_core_count": 32,
+    "ram_total": "128 GiB",
+    "status": "operational",
+    "visibility": "visible",
+    "node_cpu_usage": "4.8",
+    "node_cpu_memory": "14.1",
+    "time": "2026-06-28 10:15:10",
+    "cuda_versions": [
+      "12.1"
+    ],
+    "default_cuda_version": "12.1",
+    "is_docker_available": true,
+    "is_singularity_available": false,
+    "gpu_name": "NVIDIA A40"
+  },
+  "process_info": [
+    {
+      "cpu": "2.9",
+      "cpu_memory": "0.220",
+      "process_name": "python idle_worker.py",
+      "process_type": "python",
+      "process_id": "1801",
+      "start_time": "10:00",
+      "status": "sleeping",
+      "user": "demo",
+      "is_gpu_process": false,
+      "gpu_memory": null
+    }
+  ],
+  "gpu_info": [
+    {
+      "fan_speed": "23 %",
+      "gpu_id": "0",
+      "gpu_name": "NVIDIA A40",
+      "gpu_power_draw": "38 W",
+      "gpu_power_limit": "300 W",
+      "gpu_temperature": "31 C",
+      "gpu_util": "0 %",
+      "memory_free": "46068 MiB",
+      "memory_total": "46068 MiB",
+      "memory_used": "0 MiB",
+      "driver_version": "550.54.15",
+      "processes": []
+    },
+    {
+      "fan_speed": "23 %",
+      "gpu_id": "1",
+      "gpu_name": "NVIDIA A40",
+      "gpu_power_draw": "39 W",
+      "gpu_power_limit": "300 W",
+      "gpu_temperature": "31 C",
+      "gpu_util": "0 %",
+      "memory_free": "46068 MiB",
+      "memory_total": "46068 MiB",
+      "memory_used": "0 MiB",
+      "driver_version": "550.54.15",
+      "processes": []
+    }
+  ],
+  "file_server_info": [],
+  "storage_io_info": []
+}

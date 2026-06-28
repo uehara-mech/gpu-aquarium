@@ -1,0 +1,257 @@
+{
+  "basic_info": {
+    "os": "Rocky Linux 9.4",
+    "host_name": "tako",
+    "uname": "Linux tako 5.14.0-427.el9.x86_64",
+    "node_cpu_memory_total": "1024 GiB",
+    "node_cpu_memory_used": "711 GiB",
+    "node_cpu_swap_total": "16 GiB",
+    "node_cpu_swap_used": "1 GiB",
+    "cpu_core_count": 192,
+    "ram_total": "1024 GiB",
+    "status": "operational",
+    "visibility": "visible",
+    "node_cpu_usage": "62.7",
+    "node_cpu_memory": "69.4",
+    "time": "2026-06-28 10:16:12",
+    "cuda_versions": [
+      "12.5",
+      "12.1"
+    ],
+    "default_cuda_version": "12.5",
+    "is_docker_available": true,
+    "is_singularity_available": true,
+    "gpu_name": "NVIDIA H100 SXM5 80GB"
+  },
+  "process_info": [
+    {
+      "cpu": "122.4",
+      "cpu_memory": "7.410",
+      "process_name": "python pretrain_llm.py --stage sft",
+      "process_type": "python",
+      "process_id": "31004",
+      "start_time": "03:18",
+      "status": "running",
+      "user": "alice",
+      "is_gpu_process": true,
+      "gpu_memory": "71892 MiB"
+    },
+    {
+      "cpu": "84.2",
+      "cpu_memory": "4.012",
+      "process_name": "python dataloader_worker.py",
+      "process_type": "python",
+      "process_id": "31037",
+      "start_time": "03:19",
+      "status": "running",
+      "user": "alice",
+      "is_gpu_process": true,
+      "gpu_memory": "18340 MiB"
+    },
+    {
+      "cpu": "33.8",
+      "cpu_memory": "2.334",
+      "process_name": "tensorboard --logdir runs/h100",
+      "process_type": "tensorboard",
+      "process_id": "31910",
+      "start_time": "08:56",
+      "status": "sleeping",
+      "user": "alice",
+      "is_gpu_process": false,
+      "gpu_memory": null
+    },
+    {
+      "cpu": "5.1",
+      "cpu_memory": "0.430",
+      "process_name": "/bin/bash",
+      "process_type": "bash",
+      "process_id": "32001",
+      "start_time": "09:21",
+      "status": "sleeping",
+      "user": "bob",
+      "is_gpu_process": false,
+      "gpu_memory": null
+    }
+  ],
+  "gpu_info": [
+    {
+      "fan_speed": "41 %",
+      "gpu_id": "0",
+      "gpu_name": "NVIDIA H100 SXM5 80GB",
+      "gpu_power_draw": "553 W",
+      "gpu_power_limit": "700 W",
+      "gpu_temperature": "68 C",
+      "gpu_util": "94 %",
+      "memory_free": "4096 MiB",
+      "memory_total": "81559 MiB",
+      "memory_used": "77463 MiB",
+      "driver_version": "555.42.02",
+      "processes": [
+        {
+          "cpu": "122.4",
+          "cpu_memory": "7.410",
+          "process_name": "python pretrain_llm.py --stage sft",
+          "process_type": "python",
+          "process_id": "31004",
+          "start_time": "03:18",
+          "status": "running",
+          "user": "alice",
+          "is_gpu_process": true,
+          "gpu_memory": "71892 MiB"
+        }
+      ]
+    },
+    {
+      "fan_speed": "39 %",
+      "gpu_id": "1",
+      "gpu_name": "NVIDIA H100 SXM5 80GB",
+      "gpu_power_draw": "531 W",
+      "gpu_power_limit": "700 W",
+      "gpu_temperature": "66 C",
+      "gpu_util": "91 %",
+      "memory_free": "6144 MiB",
+      "memory_total": "81559 MiB",
+      "memory_used": "75415 MiB",
+      "driver_version": "555.42.02",
+      "processes": [
+        {
+          "cpu": "122.4",
+          "cpu_memory": "7.410",
+          "process_name": "python pretrain_llm.py --stage sft",
+          "process_type": "python",
+          "process_id": "31004",
+          "start_time": "03:18",
+          "status": "running",
+          "user": "alice",
+          "is_gpu_process": true,
+          "gpu_memory": "71892 MiB"
+        }
+      ]
+    },
+    {
+      "fan_speed": "35 %",
+      "gpu_id": "2",
+      "gpu_name": "NVIDIA H100 SXM5 80GB",
+      "gpu_power_draw": "188 W",
+      "gpu_power_limit": "700 W",
+      "gpu_temperature": "47 C",
+      "gpu_util": "38 %",
+      "memory_free": "60416 MiB",
+      "memory_total": "81559 MiB",
+      "memory_used": "21143 MiB",
+      "driver_version": "555.42.02",
+      "processes": [
+        {
+          "cpu": "84.2",
+          "cpu_memory": "4.012",
+          "process_name": "python dataloader_worker.py",
+          "process_type": "python",
+          "process_id": "31037",
+          "start_time": "03:19",
+          "status": "running",
+          "user": "alice",
+          "is_gpu_process": true,
+          "gpu_memory": "18340 MiB"
+        }
+      ]
+    },
+    {
+      "fan_speed": "34 %",
+      "gpu_id": "3",
+      "gpu_name": "NVIDIA H100 SXM5 80GB",
+      "gpu_power_draw": "91 W",
+      "gpu_power_limit": "700 W",
+      "gpu_temperature": "39 C",
+      "gpu_util": "3 %",
+      "memory_free": "80768 MiB",
+      "memory_total": "81559 MiB",
+      "memory_used": "791 MiB",
+      "driver_version": "555.42.02",
+      "processes": []
+    },
+    {
+      "fan_speed": "40 %",
+      "gpu_id": "4",
+      "gpu_name": "NVIDIA H100 SXM5 80GB",
+      "gpu_power_draw": "610 W",
+      "gpu_power_limit": "700 W",
+      "gpu_temperature": "72 C",
+      "gpu_util": "98 %",
+      "memory_free": "1024 MiB",
+      "memory_total": "81559 MiB",
+      "memory_used": "80535 MiB",
+      "driver_version": "555.42.02",
+      "processes": [
+        {
+          "cpu": "122.4",
+          "cpu_memory": "7.410",
+          "process_name": "python pretrain_llm.py --stage sft",
+          "process_type": "python",
+          "process_id": "31004",
+          "start_time": "03:18",
+          "status": "running",
+          "user": "alice",
+          "is_gpu_process": true,
+          "gpu_memory": "71892 MiB"
+        }
+      ]
+    },
+    {
+      "fan_speed": "33 %",
+      "gpu_id": "5",
+      "gpu_name": "NVIDIA H100 SXM5 80GB",
+      "gpu_power_draw": "86 W",
+      "gpu_power_limit": "700 W",
+      "gpu_temperature": "38 C",
+      "gpu_util": "0 %",
+      "memory_free": "81559 MiB",
+      "memory_total": "81559 MiB",
+      "memory_used": "0 MiB",
+      "driver_version": "555.42.02",
+      "processes": []
+    },
+    {
+      "fan_speed": "36 %",
+      "gpu_id": "6",
+      "gpu_name": "NVIDIA H100 SXM5 80GB",
+      "gpu_power_draw": "244 W",
+      "gpu_power_limit": "700 W",
+      "gpu_temperature": "51 C",
+      "gpu_util": "47 %",
+      "memory_free": "49152 MiB",
+      "memory_total": "81559 MiB",
+      "memory_used": "32407 MiB",
+      "driver_version": "555.42.02",
+      "processes": [
+        {
+          "cpu": "84.2",
+          "cpu_memory": "4.012",
+          "process_name": "python dataloader_worker.py",
+          "process_type": "python",
+          "process_id": "31037",
+          "start_time": "03:19",
+          "status": "running",
+          "user": "alice",
+          "is_gpu_process": true,
+          "gpu_memory": "18340 MiB"
+        }
+      ]
+    },
+    {
+      "fan_speed": "33 %",
+      "gpu_id": "7",
+      "gpu_name": "NVIDIA H100 SXM5 80GB",
+      "gpu_power_draw": "89 W",
+      "gpu_power_limit": "700 W",
+      "gpu_temperature": "38 C",
+      "gpu_util": "1 %",
+      "memory_free": "81559 MiB",
+      "memory_total": "81559 MiB",
+      "memory_used": "0 MiB",
+      "driver_version": "555.42.02",
+      "processes": []
+    }
+  ],
+  "file_server_info": [],
+  "storage_io_info": []
+}

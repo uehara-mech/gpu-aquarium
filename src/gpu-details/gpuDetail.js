@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from "react-router-dom";
 import Grid from "@mui/material/Grid";
-import axios from "axios";
 import Stack from "@mui/material/Stack";
 import GpuInfo from "./gpuInfo";
 import GpuDetailHeader from "./gpuDetailHeader";
@@ -13,6 +12,7 @@ import NodeStats from "./nodeStats";
 import { useRecoilValue } from "recoil";
 import { betaFeatureState } from "../atom/atom";
 import { useData } from "../context";
+import {getNodeData} from "../api";
 
 export default function GpuDetail() {
     const [nodeInfo, setNodeInfo] = useState(null);
@@ -21,24 +21,12 @@ export default function GpuDetail() {
     const { name } = useParams();
     const location = useLocation();
     const timestamp = new URLSearchParams(location.search).get("timestamp");
-    const apiBaseUrl = process.env.REACT_APP_API_BASE_URL || '';
     const { setState } = useData();
 
     useEffect(() => {
         const fetchData = async () => {
-            const url = timestamp
-                ? `${apiBaseUrl}/log/?n=${name}&t=${timestamp}`
-                : `${apiBaseUrl}/node/?n=${name}&_=${new Date().getTime()}`;
-
             try {
-                const res = await axios.get(url, {
-                    mode: 'cors',
-                    headers: {
-                        'Cache-Control': 'no-cache',
-                        'Pragma': 'no-cache',
-                        'Expires': '0',
-                    },
-                });
+                const res = await getNodeData(name, timestamp);
                 setNodeInfo(res.data);
                 setState({ cardContainerData: null, gpuDetails: res.data });
             } catch (err) {
@@ -50,7 +38,7 @@ export default function GpuDetail() {
         fetchData();
         const timer = setTimeout(() => setIsLoading(true), 1000);
         return () => clearTimeout(timer);
-    }, [name, apiBaseUrl, setState, timestamp]);
+    }, [name, setState, timestamp]);
 
     if (nodeInfo === false) {
         return (

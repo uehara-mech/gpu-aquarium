@@ -2,17 +2,14 @@ import React, {useEffect, useState} from 'react';
 
 import {useParams} from "react-router-dom";
 import Grid from '@mui/material/Unstable_Grid2';
-import axios from "axios";
 
 import { LineChart } from '@mui/x-charts/LineChart';
 import Stack from "@mui/material/Stack";
-import GpuInfo from "./gpuInfo";
-import GpuDetailHeader from "./gpuDetailHeader";
-import TopProcessTable from "./topProcessTable";
-import {Alert, AlertTitle, Box, useTheme,} from "@mui/material";
+import {Alert, Box, useTheme,} from "@mui/material";
 import {StyledPaper, StyledDivider, StyledBorderChip} from "./common";
-import {LoadingCircle, StyledWarningAlert} from "../utils/utils";
+import {LoadingCircle} from "../utils/utils";
 import Typography from "@mui/material/Typography";
+import {getNodeStats} from "../api";
 
 
 export default function NodeStats(props) {
@@ -27,17 +24,7 @@ export default function NodeStats(props) {
 
     useEffect(() => {
         const fetchData = async () => {
-            // eslint-disable-next-line
-            // let url = '/node_stats/?n=' + name;
-            let url = `/node_stats/?n=${name}&_=${new Date().getTime()}`;
-            const nodeStats = await axios.get(url, {
-                mode: 'cors',
-                headers: {
-                    'Cache-Control': 'no-cache',
-                    'Pragma': 'no-cache',
-                    'Expires': '0'
-                }
-            })
+            await getNodeStats(name)
                 .then((res) => {
                     setNodeStats(res.data);
                     // setNodeInfo(null);
@@ -55,7 +42,7 @@ export default function NodeStats(props) {
 
         // clear timeout when component unmounts
         return () => clearTimeout(timer);
-    }, []);
+    }, [name]);
 
     console.log(nodeStats);
 

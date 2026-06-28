@@ -13,7 +13,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import Grid from '@mui/material/Grid';
 import Button from "@mui/material/Button";
-import {grey} from "@mui/material/colors";
+import {Link} from "react-router-dom";
 
 const RootStack = styled(Stack)(({ theme }) => ({
     padding: "8px 0px 8px 20px",
@@ -172,10 +172,11 @@ export default function GpuHeader(props) {
 
             <InfoIcon>
                 <DetailButton
+                    component={Link}
                     variant="outlined"
                     size="small"
                     startIcon={dispInfoIcon(props.data.basic_info.status)}
-                    href={'/' + props.data.basic_info.host_name}
+                    to={'/' + props.data.basic_info.host_name}
                     status={props.data.basic_info.status}
                     >
                     DETAIL

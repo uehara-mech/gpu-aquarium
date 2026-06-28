@@ -1,0 +1,97 @@
+{
+  "basic_info": {
+    "os": "Ubuntu 22.04.5 LTS",
+    "host_name": "isaki",
+    "uname": "Linux isaki 6.5.0-44-generic x86_64",
+    "node_cpu_memory_total": "192 GiB",
+    "node_cpu_memory_used": "96 GiB",
+    "node_cpu_swap_total": "8 GiB",
+    "node_cpu_swap_used": "0 GiB",
+    "cpu_core_count": 48,
+    "ram_total": "192 GiB",
+    "status": "warning",
+    "visibility": "visible",
+    "node_cpu_usage": "39.6",
+    "node_cpu_memory": "50.0",
+    "time": "2026-06-28 10:14:22",
+    "cuda_versions": [
+      "12.2",
+      "11.8"
+    ],
+    "default_cuda_version": "12.2",
+    "is_docker_available": true,
+    "is_singularity_available": true,
+    "gpu_name": "NVIDIA Tesla T4"
+  },
+  "process_info": [
+    {
+      "cpu": "28.8",
+      "cpu_memory": "2.140",
+      "process_name": "python batch_inference.py",
+      "process_type": "python",
+      "process_id": "6601",
+      "start_time": "08:40",
+      "status": "running",
+      "user": "isaki-user",
+      "is_gpu_process": true,
+      "gpu_memory": "11264 MiB"
+    },
+    {
+      "cpu": "6.7",
+      "cpu_memory": "0.560",
+      "process_name": "jupyter-notebook",
+      "process_type": "jupyter",
+      "process_id": "6672",
+      "start_time": "09:18",
+      "status": "sleeping",
+      "user": "guest",
+      "is_gpu_process": false,
+      "gpu_memory": null
+    }
+  ],
+  "gpu_info": [
+    {
+      "fan_speed": "35 %",
+      "gpu_id": "0",
+      "gpu_name": "NVIDIA Tesla T4",
+      "gpu_power_draw": "61 W",
+      "gpu_power_limit": "70 W",
+      "gpu_temperature": "67 C",
+      "gpu_util": "88 %",
+      "memory_free": "3456 MiB",
+      "memory_total": "15360 MiB",
+      "memory_used": "11904 MiB",
+      "driver_version": "535.183.01",
+      "processes": [
+        {
+          "cpu": "28.8",
+          "cpu_memory": "2.140",
+          "process_name": "python batch_inference.py",
+          "process_type": "python",
+          "process_id": "6601",
+          "start_time": "08:40",
+          "status": "running",
+          "user": "isaki-user",
+          "is_gpu_process": true,
+          "gpu_memory": "11264 MiB"
+        }
+      ]
+    },
+    {
+      "fan_speed": "28 %",
+      "gpu_id": "1",
+      "gpu_name": "NVIDIA Tesla T4",
+      "gpu_power_draw": "18 W",
+      "gpu_power_limit": "70 W",
+      "gpu_temperature": "42 C",
+      "gpu_util": "3 %",
+      "memory_free": "15360 MiB",
+      "memory_total": "15360 MiB",
+      "memory_used": "0 MiB",
+      "driver_version": "535.183.01",
+      "processes": []
+    }
+  ],
+  "file_server_info": [],
+  "storage_io_info": []
+}

@@ -1,0 +1,111 @@
+{
+  "basic_info": {
+    "os": "Debian GNU/Linux 12",
+    "host_name": "bora",
+    "uname": "Linux bora 6.1.0-22-amd64 x86_64",
+    "node_cpu_memory_total": "384 GiB",
+    "node_cpu_memory_used": "41 GiB",
+    "node_cpu_swap_total": "8 GiB",
+    "node_cpu_swap_used": "0 GiB",
+    "cpu_core_count": 96,
+    "ram_total": "384 GiB",
+    "status": "operational",
+    "visibility": "visible",
+    "node_cpu_usage": "7.6",
+    "node_cpu_memory": "10.7",
+    "time": "2026-06-28 10:16:01",
+    "cuda_versions": [
+      "12.4"
+    ],
+    "default_cuda_version": "12.4",
+    "is_docker_available": false,
+    "is_singularity_available": true,
+    "gpu_name": "NVIDIA L40S"
+  },
+  "process_info": [
+    {
+      "cpu": "4.5",
+      "cpu_memory": "0.330",
+      "process_name": "python notebook_gateway.py",
+      "process_type": "python",
+      "process_id": "1204",
+      "start_time": "09:11",
+      "status": "sleeping",
+      "user": "guest",
+      "is_gpu_process": false,
+      "gpu_memory": null
+    },
+    {
+      "cpu": "1.8",
+      "cpu_memory": "0.120",
+      "process_name": "/bin/sh backup_healthcheck.sh",
+      "process_type": "sh",
+      "process_id": "1220",
+      "start_time": "09:58",
+      "status": "sleeping",
+      "user": "ops",
+      "is_gpu_process": false,
+      "gpu_memory": null
+    }
+  ],
+  "gpu_info": [
+    {
+      "fan_speed": "20 %",
+      "gpu_id": "0",
+      "gpu_name": "NVIDIA L40S",
+      "gpu_power_draw": "38 W",
+      "gpu_power_limit": "350 W",
+      "gpu_temperature": "32 C",
+      "gpu_util": "0 %",
+      "memory_free": "46068 MiB",
+      "memory_total": "46068 MiB",
+      "memory_used": "0 MiB",
+      "driver_version": "550.54.15",
+      "processes": []
+    },
+    {
+      "fan_speed": "20 %",
+      "gpu_id": "1",
+      "gpu_name": "NVIDIA L40S",
+      "gpu_power_draw": "41 W",
+      "gpu_power_limit": "350 W",
+      "gpu_temperature": "33 C",
+      "gpu_util": "0 %",
+      "memory_free": "46068 MiB",
+      "memory_total": "46068 MiB",
+      "memory_used": "0 MiB",
+      "driver_version": "550.54.15",
+      "processes": []
+    },
+    {
+      "fan_speed": "20 %",
+      "gpu_id": "2",
+      "gpu_name": "NVIDIA L40S",
+      "gpu_power_draw": "39 W",
+      "gpu_power_limit": "350 W",
+      "gpu_temperature": "32 C",
+      "gpu_util": "0 %",
+      "memory_free": "46068 MiB",
+      "memory_total": "46068 MiB",
+      "memory_used": "0 MiB",
+      "driver_version": "550.54.15",
+      "processes": []
+    },
+    {
+      "fan_speed": "20 %",
+      "gpu_id": "3",
+      "gpu_name": "NVIDIA L40S",
+      "gpu_power_draw": "40 W",
+      "gpu_power_limit": "350 W",
+      "gpu_temperature": "33 C",
+      "gpu_util": "0 %",
+      "memory_free": "46068 MiB",
+      "memory_total": "46068 MiB",
+      "memory_used": "0 MiB",
+      "driver_version": "550.54.15",
+      "processes": []
+    }
+  ],
+  "file_server_info": [],
+  "storage_io_info": []
+}

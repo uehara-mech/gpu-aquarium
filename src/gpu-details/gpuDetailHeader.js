@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
@@ -17,6 +16,7 @@ import HistoryIcon from '@mui/icons-material/History';
 import {styled} from "@mui/material/styles";
 import {Alert} from "@mui/material";
 import {Link} from "react-router-dom";
+import {getHistoryLogs} from "../api";
 
 const StyledHeaderPaper = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.paper.default,
@@ -90,8 +90,6 @@ export default function GpuDetailHeader(props) {
     const [historyLogs, setHistoryLogs] = useState([]);
     const [errorSnackbarOpen, setErrorSnackbarOpen] = useState(false);
 
-    const apiBaseUrl = process.env.REACT_APP_API_BASE_URL || '';
-
     if (cuda === null || cuda === undefined || cuda.length === 0) {
         cuda = "N/A";
     } else {
@@ -162,8 +160,7 @@ export default function GpuDetailHeader(props) {
 
     const handleHistoryClick = async () => {
         try {
-            let url = `${apiBaseUrl}/history/?n=${name}`;
-            const response = await axios.get(url);
+            const response = await getHistoryLogs(name);
             setHistoryLogs(response.data);
             setHistoryDialogOpen(true);
         } catch (error) {

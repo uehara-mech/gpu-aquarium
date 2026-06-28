@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import axios from 'axios';
 
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import CssBaseline from '@mui/material/CssBaseline';
 
-import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
+import {HashRouter, Routes, Route, Link} from "react-router-dom";
 import {createTheme, styled, ThemeProvider} from '@mui/material/styles';
 
 import CardContainer from './gpu-card/cardContainer';
@@ -18,9 +17,9 @@ import {getDesignTokens} from "./theme";
 import {LoadingCircle} from "./utils/utils";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
-import DownloadIcon from '@mui/icons-material/Download';
 import { useData, DataProvider } from './context'
 import DownloadButton from "./downloadButton";
+import {getMergedData} from "./api";
 
 function App() {
     return (
@@ -61,8 +60,7 @@ function Root() {
     const showHiddenNode = useRecoilValue(showHiddenNodeState)['tmp'];
     const [isLoading, setIsLoading] = useState(false);
 
-    const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
-    const appTitle = process.env.REACT_APP_TITLE;
+    const appTitle = process.env.REACT_APP_TITLE || 'AQUARIUM';
 
     const theme = createTheme(getDesignTokens(themeValue));
 
@@ -72,14 +70,7 @@ function Root() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const serverInfo = await axios.get(`${apiBaseUrl}/merged_data?timestamp=${new Date().getTime()}`, {
-                mode: 'cors',
-                headers: {
-                    'Cache-Control': 'no-cache',
-                    'Pragma': 'no-cache',
-                    'Expires': '0'
-                }
-            })
+            await getMergedData()
                 .then((res) => {
                     if (isPlainObject(res.data)) {
                         // Filter servers based on visibility
@@ -107,7 +98,7 @@ function Root() {
         }, 1000);
 
         return () => clearTimeout(timer);
-    }, [showHiddenNode]);
+    }, [showHiddenNode, setserverInfo]);
 
     const CardContainerWrapper = () => {
         const { state, setState } = useData();
@@ -134,7 +125,7 @@ function Root() {
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <DataProvider>
-                <BrowserRouter>
+                <HashRouter>
                     <StyledAppBar position="sticky">
                         <Toolbar variant="dense">
                             <Grid container justifyContent={"center"} alignItems={"center"}>
@@ -156,7 +147,7 @@ function Root() {
                         <Route path="/:name" element={<GpuDetail />} />
                         <Route path="/" element={<CardContainerWrapper/>} />
                     </Routes>
-                </BrowserRouter>
+                </HashRouter>
             </DataProvider>
         </ThemeProvider>
     );

@@ -1,0 +1,113 @@
+{
+  "basic_info": {
+    "os": "Ubuntu 22.04.4 LTS",
+    "host_name": "madai",
+    "uname": "Linux madai 6.5.0-41-generic x86_64",
+    "node_cpu_memory_total": "256 GiB",
+    "node_cpu_memory_used": "119 GiB",
+    "node_cpu_swap_total": "8 GiB",
+    "node_cpu_swap_used": "0 GiB",
+    "cpu_core_count": 64,
+    "ram_total": "256 GiB",
+    "status": "operational",
+    "visibility": "visible",
+    "node_cpu_usage": "26.8",
+    "node_cpu_memory": "46.5",
+    "time": "2026-06-28 10:00:00",
+    "cuda_versions": [
+      "12.4",
+      "11.8"
+    ],
+    "default_cuda_version": "12.4",
+    "is_docker_available": true,
+    "is_singularity_available": true,
+    "gpu_name": "NVIDIA A100-SXM4-80GB"
+  },
+  "process_info": [
+    {
+      "cpu": "33.7",
+      "cpu_memory": "2.100",
+      "process_name": "python train_segmentation.py",
+      "process_type": "python",
+      "process_id": "18241",
+      "start_time": "09:02",
+      "status": "running",
+      "user": "demo",
+      "is_gpu_process": true,
+      "gpu_memory": "18432 MiB"
+    }
+  ],
+  "gpu_info": [
+    {
+      "fan_speed": "31 %",
+      "gpu_id": "0",
+      "gpu_name": "NVIDIA A100-SXM4-80GB",
+      "gpu_power_draw": "219 W",
+      "gpu_power_limit": "400 W",
+      "gpu_temperature": "51 C",
+      "gpu_util": "65 %",
+      "memory_free": "61440 MiB",
+      "memory_total": "81920 MiB",
+      "memory_used": "20480 MiB",
+      "driver_version": "550.54.15",
+      "processes": [
+        {
+          "cpu": "33.7",
+          "cpu_memory": "2.100",
+          "process_name": "python train_segmentation.py",
+          "process_type": "python",
+          "process_id": "18241",
+          "start_time": "09:02",
+          "status": "running",
+          "user": "demo",
+          "is_gpu_process": true,
+          "gpu_memory": "18432 MiB"
+        }
+      ]
+    },
+    {
+      "fan_speed": "28 %",
+      "gpu_id": "1",
+      "gpu_name": "NVIDIA A100-SXM4-80GB",
+      "gpu_power_draw": "63 W",
+      "gpu_power_limit": "400 W",
+      "gpu_temperature": "37 C",
+      "gpu_util": "1 %",
+      "memory_free": "81920 MiB",
+      "memory_total": "81920 MiB",
+      "memory_used": "0 MiB",
+      "driver_version": "550.54.15",
+      "processes": []
+    },
+    {
+      "fan_speed": "30 %",
+      "gpu_id": "2",
+      "gpu_name": "NVIDIA A100-SXM4-80GB",
+      "gpu_power_draw": "338 W",
+      "gpu_power_limit": "400 W",
+      "gpu_temperature": "71 C",
+      "gpu_util": "87 %",
+      "memory_free": "16384 MiB",
+      "memory_total": "81920 MiB",
+      "memory_used": "65536 MiB",
+      "driver_version": "550.54.15",
+      "processes": []
+    },
+    {
+      "fan_speed": "29 %",
+      "gpu_id": "3",
+      "gpu_name": "NVIDIA A100-SXM4-80GB",
+      "gpu_power_draw": "70 W",
+      "gpu_power_limit": "400 W",
+      "gpu_temperature": "39 C",
+      "gpu_util": "0 %",
+      "memory_free": "81920 MiB",
+      "memory_total": "81920 MiB",
+      "memory_used": "0 MiB",
+      "driver_version": "550.54.15",
+      "processes": []
+    }
+  ],
+  "file_server_info": [],
+  "storage_io_info": []
+}

@@ -22,6 +22,13 @@ const getLocalSettings = (key, defaultVal) => {
     return storageValue?.fixed ?? defaultVal;
 };
 
+const getSystemColorTheme = () => {
+    if (typeof window === "undefined" || !window.matchMedia) {
+        return "light";
+    }
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+};
+
 // Utility function to set local storage value
 const setLocalStorage = (key, value) => {
     if (typeof window !== "undefined" && localStorage) {
@@ -67,8 +74,8 @@ export const FilterState = atom({
 export const themeState = atom({
     key: "themeState",
     default: {
-        tmp: getLocalSettings("colorTheme", "light"),
-        fixed: getLocalSettings("colorTheme", "light"),
+        tmp: getLocalSettings("colorTheme", getSystemColorTheme()),
+        fixed: getLocalSettings("colorTheme", getSystemColorTheme()),
     },
 });
 

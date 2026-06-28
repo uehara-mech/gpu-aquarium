@@ -1,0 +1,84 @@
+{
+  "basic_info": {
+    "os": "Ubuntu 24.04 LTS",
+    "host_name": "iwana",
+    "uname": "Linux iwana 6.8.0-31-generic x86_64",
+    "node_cpu_memory_total": "128 GiB",
+    "node_cpu_memory_used": "31 GiB",
+    "node_cpu_swap_total": "4 GiB",
+    "node_cpu_swap_used": "0 GiB",
+    "cpu_core_count": 32,
+    "ram_total": "128 GiB",
+    "status": "warning",
+    "visibility": "visible",
+    "node_cpu_usage": "14.2",
+    "node_cpu_memory": "24.2",
+    "time": "2026-06-28 10:14:48",
+    "cuda_versions": [
+      "12.2"
+    ],
+    "default_cuda_version": "12.2",
+    "is_docker_available": true,
+    "is_singularity_available": false,
+    "gpu_name": "NVIDIA RTX 6000 Ada"
+  },
+  "process_info": [
+    {
+      "cpu": "9.1",
+      "cpu_memory": "0.850",
+      "process_name": "python inference_service.py",
+      "process_type": "python",
+      "process_id": "2421",
+      "start_time": "07:12",
+      "status": "running",
+      "user": "svc",
+      "is_gpu_process": true,
+      "gpu_memory": "6144 MiB"
+    }
+  ],
+  "gpu_info": [
+    {
+      "fan_speed": "24 %",
+      "gpu_id": "0",
+      "gpu_name": "NVIDIA RTX 6000 Ada",
+      "gpu_power_draw": "91 W",
+      "gpu_power_limit": "300 W",
+      "gpu_temperature": "44 C",
+      "gpu_util": "22 %",
+      "memory_free": "43008 MiB",
+      "memory_total": "49152 MiB",
+      "memory_used": "6144 MiB",
+      "driver_version": "550.54.15",
+      "processes": [
+        {
+          "cpu": "9.1",
+          "cpu_memory": "0.850",
+          "process_name": "python inference_service.py",
+          "process_type": "python",
+          "process_id": "2421",
+          "start_time": "07:12",
+          "status": "running",
+          "user": "svc",
+          "is_gpu_process": true,
+          "gpu_memory": "6144 MiB"
+        }
+      ]
+    },
+    {
+      "fan_speed": "22 %",
+      "gpu_id": "1",
+      "gpu_name": "NVIDIA RTX 6000 Ada",
+      "gpu_power_draw": "48 W",
+      "gpu_power_limit": "300 W",
+      "gpu_temperature": "35 C",
+      "gpu_util": "1 %",
+      "memory_free": "49152 MiB",
+      "memory_total": "49152 MiB",
+      "memory_used": "0 MiB",
+      "driver_version": "550.54.15",
+      "processes": []
+    }
+  ],
+  "file_server_info": [],
+  "storage_io_info": []
+}

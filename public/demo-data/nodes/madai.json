@@ -1,0 +1,150 @@
+{
+  "basic_info": {
+    "os": "Ubuntu 22.04.4 LTS",
+    "host_name": "madai",
+    "uname": "Linux madai 6.5.0-41-generic x86_64",
+    "node_cpu_memory_total": "256 GiB",
+    "node_cpu_memory_used": "128 GiB",
+    "node_cpu_swap_total": "8 GiB",
+    "node_cpu_swap_used": "0 GiB",
+    "cpu_core_count": 64,
+    "ram_total": "256 GiB",
+    "status": "operational",
+    "visibility": "visible",
+    "node_cpu_usage": "31.4",
+    "node_cpu_memory": "50.0",
+    "time": "2026-06-28 10:15:30",
+    "cuda_versions": [
+      "12.4",
+      "11.8"
+    ],
+    "default_cuda_version": "12.4",
+    "is_docker_available": true,
+    "is_singularity_available": true,
+    "gpu_name": "NVIDIA A100-SXM4-80GB"
+  },
+  "process_info": [
+    {
+      "cpu": "42.3",
+      "cpu_memory": "2.410",
+      "process_name": "python train_segmentation.py",
+      "process_type": "python",
+      "process_id": "18241",
+      "start_time": "09:02",
+      "status": "running",
+      "user": "demo",
+      "is_gpu_process": true,
+      "gpu_memory": "21504 MiB"
+    },
+    {
+      "cpu": "88.4",
+      "cpu_memory": "5.020",
+      "process_name": "python foundation_model.py",
+      "process_type": "python",
+      "process_id": "17703",
+      "start_time": "08:31",
+      "status": "running",
+      "user": "ml-user",
+      "is_gpu_process": true,
+      "gpu_memory": "76288 MiB"
+    },
+    {
+      "cpu": "13.8",
+      "cpu_memory": "1.120",
+      "process_name": "jupyter-lab",
+      "process_type": "jupyter",
+      "process_id": "18810",
+      "start_time": "09:45",
+      "status": "sleeping",
+      "user": "guest",
+      "is_gpu_process": false,
+      "gpu_memory": null
+    }
+  ],
+  "gpu_info": [
+    {
+      "fan_speed": "32 %",
+      "gpu_id": "0",
+      "gpu_name": "NVIDIA A100-SXM4-80GB",
+      "gpu_power_draw": "252 W",
+      "gpu_power_limit": "400 W",
+      "gpu_temperature": "54 C",
+      "gpu_util": "78 %",
+      "memory_free": "52736 MiB",
+      "memory_total": "81920 MiB",
+      "memory_used": "29184 MiB",
+      "driver_version": "550.54.15",
+      "processes": [
+        {
+          "cpu": "42.3",
+          "cpu_memory": "2.410",
+          "process_name": "python train_segmentation.py",
+          "process_type": "python",
+          "process_id": "18241",
+          "start_time": "09:02",
+          "status": "running",
+          "user": "demo",
+          "is_gpu_process": true,
+          "gpu_memory": "21504 MiB"
+        }
+      ]
+    },
+    {
+      "fan_speed": "28 %",
+      "gpu_id": "1",
+      "gpu_name": "NVIDIA A100-SXM4-80GB",
+      "gpu_power_draw": "65 W",
+      "gpu_power_limit": "400 W",
+      "gpu_temperature": "38 C",
+      "gpu_util": "2 %",
+      "memory_free": "81010 MiB",
+      "memory_total": "81920 MiB",
+      "memory_used": "910 MiB",
+      "driver_version": "550.54.15",
+      "processes": []
+    },
+    {
+      "fan_speed": "31 %",
+      "gpu_id": "2",
+      "gpu_name": "NVIDIA A100-SXM4-80GB",
+      "gpu_power_draw": "388 W",
+      "gpu_power_limit": "400 W",
+      "gpu_temperature": "79 C",
+      "gpu_util": "97 %",
+      "memory_free": "2816 MiB",
+      "memory_total": "81920 MiB",
+      "memory_used": "79104 MiB",
+      "driver_version": "550.54.15",
+      "processes": [
+        {
+          "cpu": "88.4",
+          "cpu_memory": "5.020",
+          "process_name": "python foundation_model.py",
+          "process_type": "python",
+          "process_id": "17703",
+          "start_time": "08:31",
+          "status": "running",
+          "user": "ml-user",
+          "is_gpu_process": true,
+          "gpu_memory": "76288 MiB"
+        }
+      ]
+    },
+    {
+      "fan_speed": "29 %",
+      "gpu_id": "3",
+      "gpu_name": "NVIDIA A100-SXM4-80GB",
+      "gpu_power_draw": "72 W",
+      "gpu_power_limit": "400 W",
+      "gpu_temperature": "39 C",
+      "gpu_util": "0 %",
+      "memory_free": "81920 MiB",
+      "memory_total": "81920 MiB",
+      "memory_used": "0 MiB",
+      "driver_version": "550.54.15",
+      "processes": []
+    }
+  ],
+  "file_server_info": [],
+  "storage_io_info": []
+}

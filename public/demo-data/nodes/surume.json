@@ -1,0 +1,149 @@
+{
+  "basic_info": {
+    "os": "Rocky Linux 8.10",
+    "host_name": "surume",
+    "uname": "Linux surume 4.18.0-553.el8.x86_64",
+    "node_cpu_memory_total": "256 GiB",
+    "node_cpu_memory_used": "184 GiB",
+    "node_cpu_swap_total": "8 GiB",
+    "node_cpu_swap_used": "0 GiB",
+    "cpu_core_count": 64,
+    "ram_total": "256 GiB",
+    "status": "warning",
+    "visibility": "visible",
+    "node_cpu_usage": "55.5",
+    "node_cpu_memory": "71.9",
+    "time": "2026-06-28 10:13:41",
+    "cuda_versions": [
+      "11.8"
+    ],
+    "default_cuda_version": "11.8",
+    "is_docker_available": true,
+    "is_singularity_available": true,
+    "gpu_name": "NVIDIA Tesla V100-SXM2-32GB"
+  },
+  "process_info": [
+    {
+      "cpu": "61.8",
+      "cpu_memory": "6.300",
+      "process_name": "python legacy_detector.py",
+      "process_type": "python",
+      "process_id": "5207",
+      "start_time": "05:02",
+      "status": "running",
+      "user": "gina",
+      "is_gpu_process": true,
+      "gpu_memory": "28000 MiB"
+    },
+    {
+      "cpu": "19.9",
+      "cpu_memory": "2.200",
+      "process_name": "python hyperparam_sweep.py",
+      "process_type": "python",
+      "process_id": "5331",
+      "start_time": "07:44",
+      "status": "running",
+      "user": "hana",
+      "is_gpu_process": true,
+      "gpu_memory": "11800 MiB"
+    },
+    {
+      "cpu": "3.3",
+      "cpu_memory": "0.400",
+      "process_name": "/bin/bash",
+      "process_type": "bash",
+      "process_id": "5390",
+      "start_time": "08:12",
+      "status": "sleeping",
+      "user": "gina",
+      "is_gpu_process": false,
+      "gpu_memory": null
+    }
+  ],
+  "gpu_info": [
+    {
+      "fan_speed": "52 %",
+      "gpu_id": "0",
+      "gpu_name": "NVIDIA Tesla V100-SXM2-32GB",
+      "gpu_power_draw": "244 W",
+      "gpu_power_limit": "300 W",
+      "gpu_temperature": "73 C",
+      "gpu_util": "96 %",
+      "memory_free": "1280 MiB",
+      "memory_total": "32768 MiB",
+      "memory_used": "31488 MiB",
+      "driver_version": "535.183.01",
+      "processes": [
+        {
+          "cpu": "61.8",
+          "cpu_memory": "6.300",
+          "process_name": "python legacy_detector.py",
+          "process_type": "python",
+          "process_id": "5207",
+          "start_time": "05:02",
+          "status": "running",
+          "user": "gina",
+          "is_gpu_process": true,
+          "gpu_memory": "28000 MiB"
+        }
+      ]
+    },
+    {
+      "fan_speed": "47 %",
+      "gpu_id": "1",
+      "gpu_name": "NVIDIA Tesla V100-SXM2-32GB",
+      "gpu_power_draw": "156 W",
+      "gpu_power_limit": "300 W",
+      "gpu_temperature": "61 C",
+      "gpu_util": "54 %",
+      "memory_free": "20120 MiB",
+      "memory_total": "32768 MiB",
+      "memory_used": "12648 MiB",
+      "driver_version": "535.183.01",
+      "processes": [
+        {
+          "cpu": "19.9",
+          "cpu_memory": "2.200",
+          "process_name": "python hyperparam_sweep.py",
+          "process_type": "python",
+          "process_id": "5331",
+          "start_time": "07:44",
+          "status": "running",
+          "user": "hana",
+          "is_gpu_process": true,
+          "gpu_memory": "11800 MiB"
+        }
+      ]
+    },
+    {
+      "fan_speed": "40 %",
+      "gpu_id": "2",
+      "gpu_name": "NVIDIA Tesla V100-SXM2-32GB",
+      "gpu_power_draw": "52 W",
+      "gpu_power_limit": "300 W",
+      "gpu_temperature": "39 C",
+      "gpu_util": "1 %",
+      "memory_free": "32768 MiB",
+      "memory_total": "32768 MiB",
+      "memory_used": "0 MiB",
+      "driver_version": "535.183.01",
+      "processes": []
+    },
+    {
+      "fan_speed": "41 %",
+      "gpu_id": "3",
+      "gpu_name": "NVIDIA Tesla V100-SXM2-32GB",
+      "gpu_power_draw": "55 W",
+      "gpu_power_limit": "300 W",
+      "gpu_temperature": "40 C",
+      "gpu_util": "2 %",
+      "memory_free": "32768 MiB",
+      "memory_total": "32768 MiB",
+      "memory_used": "0 MiB",
+      "driver_version": "535.183.01",
+      "processes": []
+    }
+  ],
+  "file_server_info": [],
+  "storage_io_info": []
+}

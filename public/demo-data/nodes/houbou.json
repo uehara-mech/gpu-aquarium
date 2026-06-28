@@ -1,0 +1,149 @@
+{
+  "basic_info": {
+    "os": "Ubuntu 22.04.5 LTS",
+    "host_name": "houbou",
+    "uname": "Linux houbou 6.5.0-44-generic x86_64",
+    "node_cpu_memory_total": "192 GiB",
+    "node_cpu_memory_used": "67 GiB",
+    "node_cpu_swap_total": "8 GiB",
+    "node_cpu_swap_used": "0 GiB",
+    "cpu_core_count": 48,
+    "ram_total": "192 GiB",
+    "status": "operational",
+    "visibility": "visible",
+    "node_cpu_usage": "22.8",
+    "node_cpu_memory": "34.9",
+    "time": "2026-06-28 10:15:55",
+    "cuda_versions": [
+      "12.3"
+    ],
+    "default_cuda_version": "12.3",
+    "is_docker_available": true,
+    "is_singularity_available": true,
+    "gpu_name": "NVIDIA GeForce RTX 4090"
+  },
+  "process_info": [
+    {
+      "cpu": "51.7",
+      "cpu_memory": "3.120",
+      "process_name": "python render_diffusion.py",
+      "process_type": "python",
+      "process_id": "9012",
+      "start_time": "10:01",
+      "status": "running",
+      "user": "carol",
+      "is_gpu_process": true,
+      "gpu_memory": "18176 MiB"
+    },
+    {
+      "cpu": "17.3",
+      "cpu_memory": "0.940",
+      "process_name": "python eval_batch.py",
+      "process_type": "python",
+      "process_id": "9131",
+      "start_time": "10:09",
+      "status": "running",
+      "user": "dave",
+      "is_gpu_process": true,
+      "gpu_memory": "9216 MiB"
+    },
+    {
+      "cpu": "2.0",
+      "cpu_memory": "0.210",
+      "process_name": ".vscode-server/bin/node",
+      "process_type": "vscode",
+      "process_id": "8764",
+      "start_time": "09:32",
+      "status": "sleeping",
+      "user": "carol",
+      "is_gpu_process": false,
+      "gpu_memory": null
+    }
+  ],
+  "gpu_info": [
+    {
+      "fan_speed": "46 %",
+      "gpu_id": "0",
+      "gpu_name": "NVIDIA GeForce RTX 4090",
+      "gpu_power_draw": "304 W",
+      "gpu_power_limit": "450 W",
+      "gpu_temperature": "63 C",
+      "gpu_util": "82 %",
+      "memory_free": "6400 MiB",
+      "memory_total": "24564 MiB",
+      "memory_used": "18164 MiB",
+      "driver_version": "550.54.15",
+      "processes": [
+        {
+          "cpu": "51.7",
+          "cpu_memory": "3.120",
+          "process_name": "python render_diffusion.py",
+          "process_type": "python",
+          "process_id": "9012",
+          "start_time": "10:01",
+          "status": "running",
+          "user": "carol",
+          "is_gpu_process": true,
+          "gpu_memory": "18176 MiB"
+        }
+      ]
+    },
+    {
+      "fan_speed": "35 %",
+      "gpu_id": "1",
+      "gpu_name": "NVIDIA GeForce RTX 4090",
+      "gpu_power_draw": "155 W",
+      "gpu_power_limit": "450 W",
+      "gpu_temperature": "49 C",
+      "gpu_util": "44 %",
+      "memory_free": "15348 MiB",
+      "memory_total": "24564 MiB",
+      "memory_used": "9216 MiB",
+      "driver_version": "550.54.15",
+      "processes": [
+        {
+          "cpu": "17.3",
+          "cpu_memory": "0.940",
+          "process_name": "python eval_batch.py",
+          "process_type": "python",
+          "process_id": "9131",
+          "start_time": "10:09",
+          "status": "running",
+          "user": "dave",
+          "is_gpu_process": true,
+          "gpu_memory": "9216 MiB"
+        }
+      ]
+    },
+    {
+      "fan_speed": "30 %",
+      "gpu_id": "2",
+      "gpu_name": "NVIDIA GeForce RTX 4090",
+      "gpu_power_draw": "31 W",
+      "gpu_power_limit": "450 W",
+      "gpu_temperature": "31 C",
+      "gpu_util": "0 %",
+      "memory_free": "24564 MiB",
+      "memory_total": "24564 MiB",
+      "memory_used": "0 MiB",
+      "driver_version": "550.54.15",
+      "processes": []
+    },
+    {
+      "fan_speed": "30 %",
+      "gpu_id": "3",
+      "gpu_name": "NVIDIA GeForce RTX 4090",
+      "gpu_power_draw": "35 W",
+      "gpu_power_limit": "450 W",
+      "gpu_temperature": "33 C",
+      "gpu_util": "2 %",
+      "memory_free": "23980 MiB",
+      "memory_total": "24564 MiB",
+      "memory_used": "584 MiB",
+      "driver_version": "550.54.15",
+      "processes": []
+    }
+  ],
+  "file_server_info": [],
+  "storage_io_info": []
+}
