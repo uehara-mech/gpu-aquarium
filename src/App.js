@@ -64,6 +64,10 @@ function Root() {
 
     const theme = createTheme(getDesignTokens(themeValue));
 
+    useEffect(() => {
+        document.body.style.backgroundColor = theme.palette.background.default;
+    }, [theme.palette.background.default]);
+
     function isPlainObject(data) {
         return Object.prototype.toString.call(data) === '[object Object]';
     }

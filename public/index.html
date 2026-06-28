@@ -45,12 +45,17 @@
   <script type="text/javascript">
       window.onload = function () {
         // load local storage and set body's background color
-        var theme = "light";
+        var theme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
         try {
-          theme = JSON.parse(localStorage.getItem("colorTheme"))["fixed"];
-          console.log("theme from local storage: " + theme);
+          var storedTheme = JSON.parse(localStorage.getItem("colorTheme"));
+          if (storedTheme && storedTheme["fixed"]) {
+            theme = storedTheme["fixed"];
+            console.log("theme from local storage: " + theme);
+          }
         } catch (e) {
-          console.log("error getting theme from local storage");
+          console.log("using system color theme");
         }
         if (theme == "dark") {
             document.getElementById("body").style.backgroundColor = "#040916";
