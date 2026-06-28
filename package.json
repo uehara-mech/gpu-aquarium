@@ -26,9 +26,9 @@
   },
   "scripts": {
     "start": "craco start",
-    "start:demo": "REACT_APP_DEMO_MODE=true REACT_APP_TITLE=\"AQUARIUM DEMO\" craco start",
+    "start:demo": "REACT_APP_DEMO_MODE=true REACT_APP_TITLE=\"GPU AQUARIUM\" craco start",
     "build": "craco build",
-    "build:demo": "REACT_APP_DEMO_MODE=true REACT_APP_TITLE=AQUARIUM craco build",
+    "build:demo": "REACT_APP_DEMO_MODE=true REACT_APP_TITLE=\"GPU AQUARIUM\" craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
   },
