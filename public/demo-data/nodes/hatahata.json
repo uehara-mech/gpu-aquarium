@@ -21,7 +21,7 @@
     "default_cuda_version": "12.6",
     "is_docker_available": true,
     "is_singularity_available": true,
-    "gpu_name": "NVIDIA B200"
+    "gpu_name": "B200"
   },
   "process_info": [
     {

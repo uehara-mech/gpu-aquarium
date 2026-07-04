@@ -20,7 +20,7 @@
     "default_cuda_version": "12.2",
     "is_docker_available": true,
     "is_singularity_available": false,
-    "gpu_name": "NVIDIA RTX 6000 Ada"
+    "gpu_name": "RTX 6000 Ada"
   },
   "process_info": [
     {

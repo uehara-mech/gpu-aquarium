@@ -21,6 +21,14 @@ export const StyledButton = styled(({ active, ...otherProps }) => <Button {...ot
     '&:hover': {
         backgroundColor: active ? theme.palette.settingButton.active.hover : theme.palette.settingButton.deactive.hover,
     },
+    [theme.breakpoints.down('sm')]: {
+        width: "100%",
+        margin: 0,
+        minHeight: "34px",
+        paddingLeft: theme.spacing(0.75),
+        paddingRight: theme.spacing(0.75),
+        overflowWrap: "anywhere",
+    },
 }));
 
 const SelectAllButton = styled(StyledButton)(({ theme }) => ({
@@ -42,6 +50,10 @@ export const KeyNameGrid = styled(Grid)(({ theme }) => ({
     fontWeight: "bold",
     fontSize: "0.95rem",
     lineHeight: "1.4rem",
+    [theme.breakpoints.down('sm')]: {
+        margin: "10px 0 6px 0",
+        paddingLeft: theme.spacing(1),
+    },
 }));
 
 export const KeyNameBar = (props) => {
@@ -88,10 +100,8 @@ export default function FilterButtons(props) {
             setFilter({...currentFilter, [filterKey]: thisFilter})
         }
     };
-    console.log("currentFilter", currentFilter)
-
     let filterButtons = filterValues.length > 0 ? sortedFilterValues.map((filterValue, i) =>
-        <Grid item xs={4} sm={3} md={2} key={i}>
+        <Grid item xs={6} sm={3} md={2} key={i} sx={{p: {xs: 0.5, sm: 0}}}>
             <StyledButton variant="contained" disableElevation
                 size="small"
                 onClick={() => handleFilterClick(filterValue)}
@@ -104,7 +114,7 @@ export default function FilterButtons(props) {
 
     // add "Select all" button to the beginning of filterButtons
     let selectAllButton = (
-    <Grid item xs={4} sm={3} md={2} key={-1}>
+    <Grid item xs={6} sm={3} md={2} key={-1} sx={{p: {xs: 0.5, sm: 0}}}>
         <SelectAllButton variant="contained" disableElevation
             size="small"
             onClick={selectAll}
@@ -120,7 +130,7 @@ export default function FilterButtons(props) {
     return (
         <div>
             <KeyNameBar filterKeyName={filterKeyName} />
-            <Grid container justify="flex-start" spacing={0} alignItems={"center"}>
+            <Grid container justifyContent="flex-start" spacing={0} alignItems={"center"}>
                 {filterButtons}
             </Grid>
         </div>

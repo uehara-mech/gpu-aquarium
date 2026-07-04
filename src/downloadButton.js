@@ -9,7 +9,6 @@ const DownloadButton = () => {
 
     const handleDownload = () => {
         const data = JSON.stringify(state, null, 2);
-        console.log("download data: ", state);
         let dataType = '';
         if (state.gpuDetails !== null) {
             dataType = state.gpuDetails.basic_info.host_name;
@@ -29,7 +28,7 @@ const DownloadButton = () => {
 
     return (
         <Tooltip title="Download as JSON">
-            <IconButton onClick={handleDownload}>
+            <IconButton onClick={handleDownload} sx={{p: {xs: 0.5, sm: 1}, flexShrink: 0}}>
                 <DownloadIcon
                     sx={{color: 'white'}}
                 />

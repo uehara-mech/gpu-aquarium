@@ -16,13 +16,12 @@ export default function ThemeButton() {
         // overwrite <body> style
         let backgroundColor = createTheme(getDesignTokens(themeName)).palette.background.default;
         document.body.style.backgroundColor = backgroundColor;
-        console.log("background color: ", backgroundColor)
     }
 
     let themeButtonList = [];
     for (let themeName of themeList) {
         themeButtonList.push(
-            <Grid item xs={4} sm={3} md={2} key={themeName}>
+            <Grid item xs={6} sm={3} md={2} key={themeName} sx={{p: {xs: 0.5, sm: 0}}}>
                 <StyledButton
                     variant="contained"
                     disableElevation
@@ -37,7 +36,7 @@ export default function ThemeButton() {
     return (
         <div>
             <KeyNameBar filterKeyName={"THEME"} />
-            <Grid container justifyItems={"flex-start"} spacing={1} alignItems={"center"}>
+            <Grid container justifyContent={"flex-start"} spacing={1} alignItems={"center"}>
                 {themeButtonList}
             </Grid>
         </div>

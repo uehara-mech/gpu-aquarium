@@ -6,7 +6,6 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import {styled} from "@mui/material/styles";
-import {blue} from "@mui/material/colors";
 import SettingsIcon from '@mui/icons-material/Settings';
 import FilterSettingContent from "./filterSetting";
 import DialogActions from "@mui/material/DialogActions";
@@ -23,13 +22,14 @@ const SettingButton = styled(Button)(({ theme }) => ({
     marginRight: "0px",
     padding: "4px 32px 4px 32px",
     fontWeight: "bold",
-    borderWidth: "1.5px",
-    borderColor: blue[50],
+    borderWidth: "1px",
+    borderColor: "#e3f2fd",
     color: "white",
     '&:hover': {
         backgroundColor: theme.palette.info.light,
-        borderColor: blue[50],
+        borderColor: "#e3f2fd",
         boxShadow: 'none',
+        borderWidth: "1px",
     },
     '& > .MuiButton-startIcon': {
         transition: "transform 0.5s",
@@ -38,6 +38,33 @@ const SettingButton = styled(Button)(({ theme }) => ({
     '&:hover > .MuiButton-startIcon': {
         transition: "transform 0.5s",
         transform: "rotate(60deg)",
+    },
+    [theme.breakpoints.down('sm')]: {
+        width: "34px",
+        height: "34px",
+        minWidth: "34px",
+        maxWidth: "34px",
+        padding: 0,
+        fontSize: 0,
+        marginRight: 0,
+        overflow: "hidden",
+        borderColor: "transparent",
+        border: "none",
+        '& .MuiButton-startIcon': {
+            marginRight: 0,
+            marginLeft: 0,
+        },
+        '& .MuiSvgIcon-root': {
+            fontSize: "1.25rem",
+        },
+    },
+}));
+
+const SettingWrapper = styled('div')(({ theme }) => ({
+    marginRight: "8px",
+    flexShrink: 0,
+    [theme.breakpoints.down('sm')]: {
+        marginRight: "2px",
     },
 }));
 
@@ -59,6 +86,10 @@ const TabButton = styled(({ active, ...otherProps }) => <Button {...otherProps} 
         borderWidth: "2px",
         borderRightColor: theme.palette.settingButton.otherSettingButton.border + " !important",
     },
+    [theme.breakpoints.down('sm')]: {
+        width: "50%",
+        minWidth: 0,
+    },
 }));
 
 const ActionButton = styled(Button)(({ theme }) => ({
@@ -71,6 +102,12 @@ const ActionButton = styled(Button)(({ theme }) => ({
         borderWidth: "2px",
         borderColor: theme.palette.settingButton.otherSettingButton.border,
         backgroundColor: theme.palette.settingButton.otherSettingButton.deactive.hover,
+    },
+    [theme.breakpoints.down('sm')]: {
+        width: "auto",
+        minWidth: "84px",
+        paddingLeft: theme.spacing(1.5),
+        paddingRight: theme.spacing(1.5),
     }
 }));
 
@@ -98,6 +135,13 @@ const StyledDialog = styled(Dialog)(({ theme }) => ({
         backgroundColor: theme.palette.paper.default,
         padding: theme.spacing(2),
         borderRadius: "0px",
+        boxSizing: "border-box",
+        [theme.breakpoints.down('sm')]: {
+            width: "calc(100% - 32px)",
+            maxWidth: "calc(100% - 32px)",
+            margin: theme.spacing(2),
+            padding: theme.spacing(1.25),
+        },
     }
 }));
 
@@ -116,14 +160,18 @@ export default function SettingDialog(props) {
     const [tab, setTab] = useState(0);
 
     const handleClickOpen = () => {
-        // overwrite tmpFilter with filterState
-        setTmpFilter(filterState);
-        // overwrite tmp with fixed
-        setColorTheme({...colorTheme, "tmp": colorTheme["fixed"]});
-        setSortOption({...sortOption, "tmp": sortOption["fixed"]});
-        setSortDirection({...sortDirection, "tmp": sortDirection["fixed"]});
-
         setOpen(true);
+
+        try {
+            // overwrite tmpFilter with filterState
+            setTmpFilter(filterState);
+            // overwrite tmp with fixed
+            setColorTheme({...colorTheme, "tmp": colorTheme["fixed"]});
+            setSortOption({...sortOption, "tmp": sortOption["fixed"]});
+            setSortDirection({...sortDirection, "tmp": sortDirection["fixed"]});
+        } catch {
+            // Keep the dialog usable if persisted settings are malformed.
+        }
     }
     const handleClickClose = () => {
         handleCancel();
@@ -173,7 +221,7 @@ export default function SettingDialog(props) {
     }
 
     return (
-        <div style={{marginLeft: "auto", marginRight: "8px"}}>
+        <SettingWrapper>
             <SettingButton
                 variant="outlined"
                 onClick={handleClickOpen}
@@ -190,8 +238,8 @@ export default function SettingDialog(props) {
                 aria-labelledby="setting-dialog-title"
                 aria-describedby="setting-dialog-description"
             >
-                <DialogTitleWithBorder id="setting-dialog-title">
-                    <ButtonGroup aria-label="outlined primary button group">
+                <DialogTitleWithBorder id="setting-dialog-title" sx={{px: {xs: 0, sm: 3}}}>
+                    <ButtonGroup aria-label="outlined primary button group" fullWidth>
                         <TabButton
                             size="small"
                             active={tab === 0}
@@ -213,8 +261,8 @@ export default function SettingDialog(props) {
                 {/* if tab === 1, display other setting */}
                 {tab === 0 ? <FilterSettingContent /> : <OtherSettingContent />}
 
-                <DialogActions sx={{justifyContent: "center"}}>
-                <Stack direction={"row"} spacing={2}>
+                <DialogActions sx={{justifyContent: "center", px: {xs: 0, sm: 3}}}>
+                <Stack direction={"row"} spacing={{xs: 1, sm: 2}} sx={{flexWrap: "wrap", justifyContent: "center", rowGap: 1}}>
                     <ActionButton onClick={handleCancel} variant="outlined"
                         disableElevation size="small">
                         Cancel
@@ -230,6 +278,6 @@ export default function SettingDialog(props) {
                 </Stack>
             </DialogActions>
             </StyledDialog>
-        </div>
+        </SettingWrapper>
     );
 }

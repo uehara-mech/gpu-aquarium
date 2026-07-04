@@ -21,7 +21,7 @@
     "default_cuda_version": "12.5",
     "is_docker_available": true,
     "is_singularity_available": true,
-    "gpu_name": "NVIDIA H100 SXM5 80GB"
+    "gpu_name": "H100 80GB"
   },
   "process_info": [
     {

@@ -21,7 +21,7 @@
     "default_cuda_version": "12.4",
     "is_docker_available": true,
     "is_singularity_available": true,
-    "gpu_name": "NVIDIA RTX A6000"
+    "gpu_name": "RTX A6000"
   },
   "process_info": [
     {

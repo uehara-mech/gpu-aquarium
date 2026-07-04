@@ -20,7 +20,7 @@
     "default_cuda_version": "12.4",
     "is_docker_available": false,
     "is_singularity_available": true,
-    "gpu_name": "NVIDIA L40S"
+    "gpu_name": "L40S"
   },
   "process_info": [
     {

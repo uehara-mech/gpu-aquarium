@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
 
 import GpuHeader from './gpuHeader';
 import GpuContent from './gpuContent';
@@ -13,6 +14,9 @@ const CustomLightPaper = styled(Paper, {
 })(({ borderWidth = 1, borderSize = 32, theme }) => ({
   position: 'relative',
   margin: '20px',
+  width: '100%',
+  maxWidth: '100%',
+  boxSizing: 'border-box',
   background: 'none',
     transition: "background-color 0.5s, box-shadow 0.5s",
     boxShadow: "inset 0 0 4px 0px #c7c7c785, 0 0 5px 0px #c7c7c785",
@@ -108,10 +112,19 @@ const PaperWithCorner = (props) => {
 
 export default function GpuCard(props) {
     return (
-        <div>
+        <Box sx={{width: "100%", maxWidth: {xs: "100%", sm: "600px"}, minWidth: 0, boxSizing: "border-box"}}>
             <PaperWithCorner
                 elevation={0}
-                sx={{margin: "8px"}}
+                sx={{
+                    margin: {xs: "8px 0px", sm: "8px"},
+                    width: {xs: "100%", sm: "calc(100% - 16px)"},
+                    maxWidth: "100%",
+                    minWidth: 0,
+                    boxSizing: "border-box",
+                    overflow: "hidden",
+                    display: "flex",
+                    flexDirection: "column",
+                }}
                 borderWidth={2.75}
                 borderSize={40}
             >
@@ -121,6 +134,6 @@ export default function GpuCard(props) {
                 <GpuContent data={props.data}/>
             {/*</Paper>*/}
             </PaperWithCorner>
-        </div>
+        </Box>
     );
 }

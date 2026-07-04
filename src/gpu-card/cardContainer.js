@@ -139,7 +139,9 @@ const createGpuCard = selector({
                 }
 
                 gpuCards.push(
-                    <Grid item xs={12} md={12} key={i}><GpuCard data={eachServerInfo}/></Grid>
+                    <Box key={i} sx={{width: "100%", maxWidth: {xs: "100%", sm: 600}, minWidth: 0, display: "flex", justifyContent: "center", mx: "auto"}}>
+                        <GpuCard data={eachServerInfo}/>
+                    </Box>
                 );
             }
         }
@@ -150,16 +152,10 @@ const createGpuCard = selector({
 export default function CardContainer(props) {
     const [gpuCards, serverInfoList] = useRecoilValue(createGpuCard);
 
-    console.log(serverInfoList);
-
-    // divide gpuCards into two columns
-    // 1. get sort direction from atom
     const sortDirection = useRecoilValue(sortDirectionState)["fixed"];
-    // 2. divide gpuCards into two columns
     let leftGpuCards = [];
     let rightGpuCards = [];
     if (sortDirection === "column") {
-        // divide by half
         for (let i = 0; i < gpuCards.length; i++) {
             if (i < gpuCards.length / 2) {
                 leftGpuCards.push(gpuCards[i]);
@@ -168,7 +164,6 @@ export default function CardContainer(props) {
             }
         }
     } else {
-        // divide by odd and even
         for (let i = 0; i < gpuCards.length; i++) {
             if (i % 2 === 0) {
                 leftGpuCards.push(gpuCards[i]);
@@ -199,16 +194,34 @@ export default function CardContainer(props) {
             );
         } else {
             return (
-                <Grid container justifyContent={"center"}>
-                    <Grid item md={10} lg={5} xs={10}>
-                        <Grid container spacing={0} sx={{paddingTop: "8px"}}>
-                            {leftGpuCards}
-                        </Grid>
+                <Grid container justifyContent={"center"} sx={{px: {xs: 2, sm: 0}}}>
+                    <Grid item md={10} xs={12} sx={{display: {xs: "block", lg: "none"}, minWidth: 0}}>
+                        <Box sx={{display: "grid", rowGap: 0, justifyItems: "center", paddingTop: "8px"}}>
+                            {gpuCards}
+                        </Box>
                     </Grid>
-                    <Grid item md={10} lg={5} xs={10}>
-                        <Grid container spacing={0}  sx={{paddingTop: "8px"}}>
-                            {rightGpuCards}
-                        </Grid>
+                    <Grid item lg={12} sx={{display: {xs: "none", lg: "block"}, minWidth: 0}}>
+                        <Box
+                            sx={{
+                                display: "grid",
+                                gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                                columnGap: 0,
+                                justifyContent: "center",
+                                alignItems: "start",
+                                width: "calc(100% - 96px)",
+                                maxWidth: 1200,
+                                minWidth: 0,
+                                mx: "auto",
+                                paddingTop: "8px",
+                            }}
+                        >
+                            <Box sx={{display: "grid", rowGap: 0, justifyItems: "center", minWidth: 0}}>
+                                {leftGpuCards}
+                            </Box>
+                            <Box sx={{display: "grid", rowGap: 0, justifyItems: "center", minWidth: 0}}>
+                                {rightGpuCards}
+                            </Box>
+                        </Box>
                     </Grid>
                 </Grid>
             );
@@ -216,7 +229,7 @@ export default function CardContainer(props) {
     };
 
     return (
-        <div style={{marginBottom: "32px"}}>
+        <div style={{marginBottom: "32px", width: "100%", overflowX: "hidden"}}>
             {gpuContainer()}
         </div>
     );

@@ -1,10 +1,10 @@
 import React from 'react';
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import Chip from "@mui/material/Chip";
 import {styled} from "@mui/material/styles";
 import {LinearProgress, linearProgressClasses} from "@mui/material";
 import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 
 
 
@@ -32,9 +32,53 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 
 const GpuGraphBar = (percentage) => {
     return (
-        <BorderLinearProgress variant="determinate" value={percentage} sx={{minWidth: 250}}/>
+        <BorderLinearProgress
+            variant="determinate"
+            value={percentage}
+            sx={{width: "100%", minWidth: 0}}
+        />
     )
 }
+
+const GpuMetricGrid = ({gpuUtil, memoryPer, memoryLabel}) => (
+    <Box
+        sx={{
+            display: "grid",
+            gridTemplateColumns: "minmax(96px, 1fr) max-content",
+            alignItems: "center",
+            columnGap: 1,
+            rowGap: 0.25,
+            width: "100%",
+            maxWidth: {xs: "100%", sm: 390},
+            minWidth: 0,
+        }}
+    >
+        {GpuGraphBar(gpuUtil)}
+        <Typography
+            variant='body2'
+            noWrap
+            sx={{
+                flexShrink: 0,
+                fontSize: {xs: "0.78rem", sm: "0.875rem"},
+                fontVariantNumeric: "tabular-nums",
+            }}
+        >
+            {gpuUtil}%
+        </Typography>
+        {GpuGraphBar(memoryPer)}
+        <Typography
+            variant='body2'
+            noWrap
+            sx={{
+                flexShrink: 0,
+                fontSize: {xs: "0.78rem", sm: "0.875rem"},
+                fontVariantNumeric: "tabular-nums",
+            }}
+        >
+            {memoryLabel}
+        </Typography>
+    </Box>
+);
 
 
 export default function GpuInfo(props) {
@@ -48,47 +92,61 @@ export default function GpuInfo(props) {
     const processes = serverInfo.processes;
 
     return (
-        <div>
-            <StyledPaper sx={{padding: "12px", marginTop: "8px", marginBottom: "8px"}} elevation={0}>
+        <div style={{width: "100%"}}>
+            <StyledPaper sx={{padding: {xs: "14px", sm: "14px"}, marginTop: "10px", marginBottom: "10px", width: "100%", boxSizing: "border-box"}} elevation={0}>
                 <Stack direction={"column"}>
-                    <Stack direction={"row"} spacing={1} alignItems="center">
+                    <Stack direction={"row"} spacing={{xs: 1.25, sm: 1.5}} alignItems={"flex-start"}>
                         <Paper variant={"outlined"} sx={{
                             display: "flex", alignItems: "center", justifyContent: "center",
-                            width: "32px", height: "32px", "borderWidth": "3px"
+                            width: {xs: "30px", sm: "32px"}, height: {xs: "30px", sm: "32px"}, "borderWidth": "3px", flexShrink: 0
                         }}>
                             <Typography variant="body1" align="center" sx={{fontWeight: '500'}}>{gpuKey}</Typography>
                         </Paper>
-                        <Stack direction={"column"} sx={{paddingLeft: "16px"}}>
-                            <Stack direction={"row"} alignItems="center">
-                                {GpuGraphBar(gpuUtil)}
-                                <Typography variant='body2' sx={{marginLeft: "8px"}}>{gpuUtil}%</Typography>
-                            </Stack>
-                            <Stack direction={"row"} alignItems="center">
-                                <div>
-                                    {GpuGraphBar(memoryPer)}
-                                </div>
-                                <Typography variant='body2' noWrap sx={{marginLeft: "8px"}}>{memoryUsed}/{memoryTotal} MiB</Typography>
-                            </Stack>
-                            <Stack direction={"row"} sx={{marginTop: "8px"}} spacing={1}>
-                                <Chip
-                                    variant="outlined"
-                                    size="small"
-                                    label={gpuTemp}
-                                />
-                                <Chip
-                                    variant="outlined"
-                                    size="small"
-                                    label={serverInfo.gpu_name}
-                                />
+                        <Stack direction={"column"} sx={{paddingLeft: {xs: 0, sm: "12px"}, minWidth: 0, flexGrow: 1}}>
+                            <GpuMetricGrid
+                                gpuUtil={gpuUtil}
+                                memoryPer={memoryPer}
+                                memoryLabel={`${memoryUsed}/${memoryTotal} MiB`}
+                            />
+                            <Stack
+                                direction={"row"}
+                                sx={{
+                                    marginTop: {xs: "10px", sm: "8px"},
+                                    flexWrap: "wrap",
+                                    gap: {xs: 0.75, sm: 1},
+                                    color: "text.secondary",
+                                    minWidth: 0,
+                                }}
+                                spacing={0}
+                            >
+                                <Typography variant="caption" sx={{lineHeight: 1.35, whiteSpace: "nowrap"}}>
+                                    {gpuTemp}
+                                </Typography>
+                                <Typography variant="caption" sx={{lineHeight: 1.35, opacity: 0.45}}>
+                                    /
+                                </Typography>
+                                <Typography
+                                    variant="caption"
+                                    sx={{
+                                        lineHeight: 1.35,
+                                        minWidth: 0,
+                                        overflow: "hidden",
+                                        textOverflow: "ellipsis",
+                                        whiteSpace: "nowrap",
+                                        maxWidth: "100%",
+                                    }}
+                                >
+                                    {serverInfo.gpu_name}
+                                </Typography>
                             </Stack>
                         </Stack>
                     </Stack>
                 </Stack>
                 <div>
-                    <Divider sx={{marginTop: "8px"}}/>
+                    <Divider sx={{marginTop: {xs: "14px", sm: "10px"}, mx: {xs: 1.25, sm: 0}, opacity: 0.7}}/>
                     <GpuProcessTable processes={processes} />
                 </div>
             </StyledPaper>
-        </ div>
+        </div>
     );
 }

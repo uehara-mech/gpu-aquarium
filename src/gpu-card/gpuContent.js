@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
 
 import GpuCardTable from './gpuCardTable';
 import GpuDenseIcon from './gpuDenseIcon';
@@ -52,17 +53,25 @@ export default function GpuContent(props) {
                 </AccordionDetails>
             </Accordion>
             <Divider />
-            <Stack direction={'row'} spacing={1} alignItems={"center"} sx={{padding: "12px 16px"}}>
+            <Stack direction={'row'} spacing={1} alignItems={"center"} sx={{padding: {xs: "12px", sm: "12px 16px"}, minWidth: 0}}>
                 <Chip
                     variant="outlined"
                     size="small"
                     label="CPU"
+                    sx={{flex: "0 0 auto"}}
                 />
-                <div>
-                    <Typography variant="body1">
+                <Box sx={{minWidth: 0}}>
+                    <Typography
+                        variant="body1"
+                        sx={{
+                            fontSize: {xs: "0.92rem", sm: "1rem"},
+                            wordBreak: "break-word",
+                            overflowWrap: "anywhere",
+                        }}
+                    >
                         {dispCpuInfo(serverInfo.basic_info)}
                     </Typography>
-                </div>
+                </Box>
             </Stack>
         </div>
     )

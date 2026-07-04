@@ -20,7 +20,7 @@
     "default_cuda_version": "12.4",
     "is_docker_available": true,
     "is_singularity_available": true,
-    "gpu_name": "NVIDIA L4"
+    "gpu_name": "L4"
   },
   "process_info": [
     {

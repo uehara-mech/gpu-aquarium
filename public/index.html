@@ -71,10 +71,9 @@
           var storedTheme = JSON.parse(localStorage.getItem("colorTheme"));
           if (storedTheme && storedTheme["fixed"]) {
             theme = storedTheme["fixed"];
-            console.log("theme from local storage: " + theme);
           }
         } catch (e) {
-          console.log("using system color theme");
+          // Fall back to the system color theme.
         }
         if (theme == "dark") {
             document.getElementById("body").style.backgroundColor = "#040916";

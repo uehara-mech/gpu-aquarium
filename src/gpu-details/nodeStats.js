@@ -26,8 +26,7 @@ export default function NodeStats(props) {
                 .then((res) => {
                     setNodeStats(res.data);
                     // setNodeInfo(null);
-                }).catch((err) => {
-                    console.log(err);
+                }).catch(() => {
                     setNodeStats({"status": "error"});
                 })
         };
@@ -41,8 +40,6 @@ export default function NodeStats(props) {
         // clear timeout when component unmounts
         return () => clearTimeout(timer);
     }, [name]);
-
-    console.log(nodeStats);
 
     const StatsLineChart = (props) => {
         if (nodeStats === null && isLoading) {
@@ -61,8 +58,6 @@ export default function NodeStats(props) {
                 )
             }
         }
-
-        console.log('timeRangeStr', timeRangeStr)
 
         const valueFormatter = (date) => {
             // timeRangeStr: seconds -> MM:SS format
@@ -141,7 +136,6 @@ export default function NodeStats(props) {
         nodeNameList = nodeNameList.filter((nodeKey) => !nodeKey.startsWith("gpu"));
         nodeNameList = nodeNameList.filter((nodeKey) => !nodeKey.startsWith("node"));
         nodeNameList = nodeNameList.filter((nodeKey) => !nodeKey.startsWith("timestamp"));
-        console.log("nodeNameList", nodeNameList);
 
         let lineCharts = nodeNameList.map((nodeName) => {
             return (

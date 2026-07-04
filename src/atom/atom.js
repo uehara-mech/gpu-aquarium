@@ -39,9 +39,7 @@ const setLocalStorage = (key, value) => {
 // Retrieve local filter settings with a specific key and default value
 const getLocalFilter = (key, defaultVal) => {
     const storageValue = getParsedLocalStorage("filter", {});
-    const returnVal = storageValue[key] ?? defaultVal;
-    console.log("getLocalFilter", key, returnVal);
-    return returnVal;
+    return storageValue[key] ?? defaultVal;
 };
 
 export const gpuState = atom({

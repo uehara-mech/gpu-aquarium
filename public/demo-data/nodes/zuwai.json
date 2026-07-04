@@ -20,7 +20,7 @@
     "default_cuda_version": "12.1",
     "is_docker_available": true,
     "is_singularity_available": false,
-    "gpu_name": "NVIDIA A40"
+    "gpu_name": "A40"
   },
   "process_info": [
     {

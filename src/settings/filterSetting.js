@@ -12,6 +12,10 @@ const createGpuFilterValues = selector({
     key: 'createGpuFilterValues',
     get: ({get}) => {
         const allData = get(gpuState);
+        if (!allData || Array.isArray(allData)) {
+            return [];
+        }
+
         let gpuNameList = [];
         for (let hostName in allData) {
             if (allData[hostName].gpu_info.length === 0) {
@@ -29,6 +33,10 @@ const createMemoryFilterValues = selector({
     key: 'createMemoryFilterValues',
     get: ({get}) => {
         const allData = get(gpuState);
+        if (!allData || Array.isArray(allData)) {
+            return [];
+        }
+
         let memoryList = [];
         for (let hostName in allData) {
             if (allData[hostName].gpu_info.length === 0) {
@@ -54,6 +62,10 @@ const createCudaFilterValues = selector({
     key: 'createCudaFilterValues',
     get: ({get}) => {
         const allData = get(gpuState);
+        if (!allData || Array.isArray(allData)) {
+            return [];
+        }
+
         let cudaList = [];
         for (let hostName in allData) {
             let cuda_versions = allData[hostName].basic_info.cuda_versions;
@@ -76,7 +88,7 @@ export default function FilterSettingContent(props) {
     const containerFilterValues = ["Docker", "Singularity"];
 
     return (
-        <DialogContent sx={{height: "360px"}}>
+        <DialogContent sx={{height: {xs: "min(62vh, 520px)", sm: "360px"}, px: {xs: 0, sm: 3}, py: {xs: 1, sm: 2}}}>
             <div>
                 {/*<GpuFilterButtons />*/}
                 <FilterButtons
