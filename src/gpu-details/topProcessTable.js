@@ -8,7 +8,6 @@ import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Box from '@mui/material/Box';
-import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
 
 import GpuTooltip from './gpuToolTip';
@@ -70,49 +69,47 @@ export default function TopProcessTable(props) {
         return () => window.removeEventListener("resize", updateScrollBar);
     }, [updateScrollBar, page, rowsPerPage, data.length]);
 
+    const themed = (theme, light, dark) => theme.palette.type === "light" ? light : dark;
+    const mobileHeaderCellSx = (theme) => ({
+        borderBottomColor: themed(theme, {xs: "#bccbdd", sm: "divider"}, {xs: "primary.main", sm: "divider"}),
+        color: {xs: "text.secondary", sm: "inherit"},
+    });
+
     return (
         <Box
-            sx={{
+            sx={(theme) => ({
                 width: "100%",
-                backgroundColor: {xs: "rgba(29, 45, 64, 0.72)", sm: "transparent"},
-            }}
+                backgroundColor: themed(theme, {xs: "#f6f8fb", sm: "transparent"}, {xs: "rgba(29, 45, 64, 0.72)", sm: "transparent"}),
+            })}
         >
             <Box
-                sx={{
+                sx={(theme) => ({
                     display: {xs: "flex", sm: "none"},
                     alignItems: "center",
-                    justifyContent: "space-between",
+                    justifyContent: "flex-start",
                     px: 1.5,
                     py: 1,
                     borderBottom: "1px solid",
                     borderColor: "divider",
-                    backgroundColor: "rgba(121, 170, 255, 0.14)",
-                }}
+                    backgroundColor: themed(theme, "#e9f0f8", "rgba(121, 170, 255, 0.14)"),
+                })}
             >
                 <Typography variant="button" sx={{fontWeight: 700, letterSpacing: 0.4}}>
                     Node Processes
                 </Typography>
-                <Chip
-                    size="small"
-                    variant="outlined"
-                    label={`${data.length} rows`}
-                    sx={{height: 22, '& .MuiChip-label': {fontSize: "0.68rem", px: 0.75}}}
-                />
             </Box>
             <Box
                 ref={scrollRef}
                 onScroll={updateScrollBar}
-                sx={{
+                sx={(theme) => ({
                     overflowX: "scroll",
-                    borderLeft: {xs: "3px solid", sm: "none"},
-                    borderLeftColor: {xs: "primary.main", sm: "transparent"},
-                    backgroundColor: {xs: "rgba(18, 28, 40, 0.64)", sm: "transparent"},
+                    backgroundColor: themed(theme, {xs: "#ffffff", sm: "transparent"}, {xs: "rgba(18, 28, 40, 0.64)", sm: "transparent"}),
                     scrollbarWidth: "none",
                     msOverflowStyle: "none",
                     '&::-webkit-scrollbar': {
                         display: "none",
                     },
-                }}
+                })}
             >
             <Table
                 aria-labelledby="tableTitle"
@@ -125,8 +122,12 @@ export default function TopProcessTable(props) {
                 }}
             >
                 <TableHead>
-                    <TableRow sx={{backgroundColor: {xs: "rgba(121, 170, 255, 0.11)", sm: "transparent"}}}>
-                        <TableCell align="right" sx={{borderBottomColor: {xs: "primary.main", sm: "divider"}, color: {xs: "text.secondary", sm: "inherit"}}}>
+                    <TableRow
+                        sx={(theme) => ({
+                            backgroundColor: themed(theme, {xs: "#edf3fa", sm: "transparent"}, {xs: "rgba(121, 170, 255, 0.11)", sm: "transparent"}),
+                        })}
+                    >
+                        <TableCell align="right" sx={mobileHeaderCellSx}>
                             <TableSortLabel
                                 active={orderBy === 'process_id'}
                                 direction={orderBy === 'process_id' ? order : 'asc'}
@@ -135,7 +136,7 @@ export default function TopProcessTable(props) {
                                 PID
                             </TableSortLabel>
                         </TableCell>
-                        <TableCell align="right" sx={{borderBottomColor: {xs: "primary.main", sm: "divider"}, color: {xs: "text.secondary", sm: "inherit"}}}>
+                        <TableCell align="right" sx={mobileHeaderCellSx}>
                             <TableSortLabel
                                 active={orderBy === 'user'}
                                 direction={orderBy === 'user' ? order : 'asc'}
@@ -144,8 +145,8 @@ export default function TopProcessTable(props) {
                                 User
                             </TableSortLabel>
                         </TableCell>
-                        <TableCell align="left" sx={{borderBottomColor: {xs: "primary.main", sm: "divider"}, color: {xs: "text.secondary", sm: "inherit"}}}>Process</TableCell>
-                        <TableCell align="right" sx={{borderBottomColor: {xs: "primary.main", sm: "divider"}, color: {xs: "text.secondary", sm: "inherit"}}}>
+                        <TableCell align="left" sx={mobileHeaderCellSx}>Process</TableCell>
+                        <TableCell align="right" sx={mobileHeaderCellSx}>
                             <TableSortLabel
                                 active={orderBy === 'cpu'}
                                 direction={orderBy === 'cpu' ? order : 'asc'}
@@ -154,7 +155,7 @@ export default function TopProcessTable(props) {
                                 %CPU
                             </TableSortLabel>
                         </TableCell>
-                        <TableCell align="right" sx={{borderBottomColor: {xs: "primary.main", sm: "divider"}, color: {xs: "text.secondary", sm: "inherit"}}}>
+                        <TableCell align="right" sx={mobileHeaderCellSx}>
                             <TableSortLabel
                                 active={orderBy === 'cpu_memory'}
                                 direction={orderBy === 'cpu_memory' ? order : 'asc'}
@@ -163,8 +164,8 @@ export default function TopProcessTable(props) {
                                 %MEM
                             </TableSortLabel>
                         </TableCell>
-                        <TableCell align="right" sx={{borderBottomColor: {xs: "primary.main", sm: "divider"}, color: {xs: "text.secondary", sm: "inherit"}}}>Start</TableCell>
-                        <TableCell align="right" sx={{borderBottomColor: {xs: "primary.main", sm: "divider"}, color: {xs: "text.secondary", sm: "inherit"}}}>Status</TableCell>
+                        <TableCell align="right" sx={mobileHeaderCellSx}>Start</TableCell>
+                        <TableCell align="right" sx={mobileHeaderCellSx}>Status</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -173,9 +174,13 @@ export default function TopProcessTable(props) {
                             hover
                             tabIndex={-1}
                             key={index}
-                            sx={{
-                                backgroundColor: {xs: index % 2 === 0 ? "rgba(255, 255, 255, 0.025)" : "rgba(121, 170, 255, 0.035)", sm: "transparent"},
-                            }}
+                            sx={(theme) => ({
+                                backgroundColor: themed(
+                                    theme,
+                                    {xs: index % 2 === 0 ? "#ffffff" : "#f5f8fc", sm: "transparent"},
+                                    {xs: index % 2 === 0 ? "rgba(255, 255, 255, 0.025)" : "rgba(121, 170, 255, 0.035)", sm: "transparent"}
+                                ),
+                            })}
                         >
                             <TableCell align="right">{n.process_id}</TableCell>
                             <TableCell align="right">{n.user}</TableCell>
@@ -192,19 +197,19 @@ export default function TopProcessTable(props) {
             </Table>
             </Box>
             <Box
-                sx={{
+                sx={(theme) => ({
                     display: {xs: "block", sm: "none"},
                     height: 8,
                     mx: 1.5,
                     my: 1,
                     borderRadius: 999,
-                    backgroundColor: "rgba(121, 170, 255, 0.18)",
+                    backgroundColor: themed(theme, "#d9e3ef", "rgba(121, 170, 255, 0.18)"),
                     position: "relative",
                     overflow: "hidden",
-                }}
+                })}
             >
                 <Box
-                    sx={{
+                    sx={(theme) => ({
                         position: "absolute",
                         top: 1,
                         bottom: 1,
@@ -212,22 +217,22 @@ export default function TopProcessTable(props) {
                         width: `${scrollBar.width}%`,
                         minWidth: 24,
                         borderRadius: 999,
-                        backgroundColor: "#8ab8ff",
-                        boxShadow: "0 0 8px rgba(138, 184, 255, 0.45)",
-                    }}
+                        backgroundColor: themed(theme, "#5f85b7", "#8ab8ff"),
+                        boxShadow: themed(theme, "0 0 0 1px rgba(55, 84, 120, 0.12)", "0 0 8px rgba(138, 184, 255, 0.45)"),
+                    })}
                 />
             </Box>
             <TablePagination
-                sx={{
+                sx={(theme) => ({
                     display: {xs: data.length <= rowsPerPage ? "none" : "block", sm: "block"},
                     borderTop: "1px solid",
                     borderColor: "divider",
-                    backgroundColor: {xs: "rgba(15, 24, 35, 0.72)", sm: "transparent"},
+                    backgroundColor: themed(theme, {xs: "#f6f8fb", sm: "transparent"}, {xs: "rgba(15, 24, 35, 0.72)", sm: "transparent"}),
                     '& .MuiTablePagination-toolbar': {
                         minHeight: {xs: 42, sm: 52},
                         px: {xs: 1, sm: 2},
                     },
-                }}
+                })}
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"
                 count={data.length}

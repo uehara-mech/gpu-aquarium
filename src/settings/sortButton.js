@@ -17,7 +17,7 @@ export default function SortButton() {
     for (let sortOptionName of Object.keys(sortOptions)) {
         let sortOptionDisplayName = sortOptions[sortOptionName];
         sortButtonList.push(
-            <Grid item xs={6} sm={3} md={2} key={sortOptionName} sx={{p: {xs: 0.5, sm: 0}}}>
+            <Grid item xs={6} sm={3} md={2} key={sortOptionName} sx={{p: {xs: 0.5, sm: 0}, display: "flex", alignItems: "stretch"}}>
                 <StyledButton
                     variant="contained"
                     disableElevation
@@ -32,7 +32,7 @@ export default function SortButton() {
     return (
         <div>
             <KeyNameBar filterKeyName={"SORT"} />
-            <Grid container justifyContent={"flex-start"} spacing={1} alignItems={"center"}>
+            <Grid container justifyContent={"flex-start"} spacing={1} alignItems={"stretch"}>
                 {sortButtonList}
             </Grid>
         </div>

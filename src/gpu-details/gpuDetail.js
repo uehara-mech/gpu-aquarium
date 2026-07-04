@@ -168,14 +168,20 @@ export default function GpuDetail() {
                 {gpuInfoContainer()}
                 <StyledPaper
                     elevation={0}
-                    sx={{
+                    sx={(theme) => ({
                         marginTop: "20px",
                         width: {xs: "100%", sm: "fit-content"},
                         overflow: "hidden",
-                        backgroundColor: {xs: "rgba(27, 41, 58, 0.92)", sm: "rgba(27, 41, 58, 0.55)"},
-                        borderColor: {xs: "#6fa4ff", sm: "divider"},
-                        boxShadow: {xs: "inset 0 0 0 1px rgba(111, 164, 255, 0.16)", sm: "none"},
-                    }}
+                        backgroundColor: theme.palette.type === "light"
+                            ? {xs: "#fbfcff", sm: "#fbfcff"}
+                            : {xs: "rgba(27, 41, 58, 0.92)", sm: "rgba(27, 41, 58, 0.55)"},
+                        borderColor: theme.palette.type === "light"
+                            ? {xs: "#b7c6d8", sm: "divider"}
+                            : {xs: "#6fa4ff", sm: "divider"},
+                        boxShadow: theme.palette.type === "light"
+                            ? {xs: "inset 0 0 0 1px rgba(80, 116, 160, 0.12)", sm: "none"}
+                            : {xs: "inset 0 0 0 1px rgba(111, 164, 255, 0.16)", sm: "none"},
+                    })}
                 >
                     <TopProcessTable processes={nodeInfo.process_info} />
                 </StyledPaper>

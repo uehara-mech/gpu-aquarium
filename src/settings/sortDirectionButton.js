@@ -24,7 +24,7 @@ export default function SortDirectionButton() {
     let sortDirectionButtonList = [];
     for (let sortDirectionName of sortDirectionList) {
         sortDirectionButtonList.push(
-            <Grid item xs={6} sm={3} md={2} key={sortDirectionName} sx={{p: {xs: 0.5, sm: 0}}}>
+            <Grid item xs={6} sm={3} md={2} key={sortDirectionName} sx={{p: {xs: 0.5, sm: 0}, display: "flex", alignItems: "stretch"}}>
                 <StyledButton
                     variant="contained"
                     startIcon={sortDirectionName === "row" ? <LeftToRightIcon /> : <TopToDownIcon />}
@@ -40,7 +40,7 @@ export default function SortDirectionButton() {
     return (
         <div>
             <KeyNameBar filterKeyName={"SORT DIRECTION"} />
-            <Grid container justifyContent={"flex-start"} spacing={1} alignItems={"center"}>
+            <Grid container justifyContent={"flex-start"} spacing={1} alignItems={"stretch"}>
                 {sortDirectionButtonList}
             </Grid>
         </div>

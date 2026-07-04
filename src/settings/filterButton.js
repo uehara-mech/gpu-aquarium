@@ -13,6 +13,8 @@ import {grey} from "@mui/material/colors";
 export const StyledButton = styled(({ active, ...otherProps }) => <Button {...otherProps} />)(({ theme, active }) => ({
     margin: theme.spacing(1),
     width: "80%",
+    minHeight: "34px",
+    height: "calc(100% - 16px)",
     lineHeight: "1.1rem",
     paddingTop: "6px",
     paddingBottom: "6px",
@@ -23,6 +25,7 @@ export const StyledButton = styled(({ active, ...otherProps }) => <Button {...ot
     },
     [theme.breakpoints.down('sm')]: {
         width: "100%",
+        height: "100%",
         margin: 0,
         minHeight: "34px",
         paddingLeft: theme.spacing(0.75),
@@ -101,7 +104,7 @@ export default function FilterButtons(props) {
         }
     };
     let filterButtons = filterValues.length > 0 ? sortedFilterValues.map((filterValue, i) =>
-        <Grid item xs={6} sm={3} md={2} key={i} sx={{p: {xs: 0.5, sm: 0}}}>
+        <Grid item xs={6} sm={3} md={2} key={i} sx={{p: {xs: 0.5, sm: 0}, display: "flex", alignItems: "stretch"}}>
             <StyledButton variant="contained" disableElevation
                 size="small"
                 onClick={() => handleFilterClick(filterValue)}
@@ -114,7 +117,7 @@ export default function FilterButtons(props) {
 
     // add "Select all" button to the beginning of filterButtons
     let selectAllButton = (
-    <Grid item xs={6} sm={3} md={2} key={-1} sx={{p: {xs: 0.5, sm: 0}}}>
+    <Grid item xs={6} sm={3} md={2} key={-1} sx={{p: {xs: 0.5, sm: 0}, display: "flex", alignItems: "stretch"}}>
         <SelectAllButton variant="contained" disableElevation
             size="small"
             onClick={selectAll}
@@ -130,7 +133,7 @@ export default function FilterButtons(props) {
     return (
         <div>
             <KeyNameBar filterKeyName={filterKeyName} />
-            <Grid container justifyContent="flex-start" spacing={0} alignItems={"center"}>
+            <Grid container justifyContent="flex-start" spacing={0} alignItems={"stretch"}>
                 {filterButtons}
             </Grid>
         </div>
