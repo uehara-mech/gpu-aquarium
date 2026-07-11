@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -18,16 +18,17 @@ export default function TopProcessTable(props) {
     const [order, setOrder] = useState('desc');
     const [orderBy, setOrderBy] = useState('cpu');
     const scrollRef = useRef(null);
+    const animationFrameRef = useRef(null);
     const [scrollBar, setScrollBar] = useState({left: 0, width: 100});
 
     const data = props.processes;
 
-    const sortedData = [...data].sort((a, b) => {
+    const sortedData = useMemo(() => [...data].sort((a, b) => {
         const aVal = isNaN(a[orderBy]) ? a[orderBy] : parseFloat(a[orderBy]);
         const bVal = isNaN(b[orderBy]) ? b[orderBy] : parseFloat(b[orderBy]);
 
         return (aVal < bVal ? -1 : 1) * (order === 'asc' ? 1 : -1);
-    });
+    }), [data, order, orderBy]);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -47,26 +48,42 @@ export default function TopProcessTable(props) {
     const visibleRows = sortedData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
     const updateScrollBar = useCallback(() => {
-        const el = scrollRef.current;
-        if (!el) {
+        if (animationFrameRef.current !== null) {
             return;
         }
+        animationFrameRef.current = requestAnimationFrame(() => {
+            animationFrameRef.current = null;
+            const el = scrollRef.current;
+            if (!el) {
+                return;
+            }
 
-        const maxScroll = el.scrollWidth - el.clientWidth;
-        if (maxScroll <= 0) {
-            setScrollBar({left: 0, width: 100});
-            return;
-        }
+            const maxScroll = el.scrollWidth - el.clientWidth;
+            if (maxScroll <= 0) {
+                setScrollBar((previous) => previous.left === 0 && previous.width === 100
+                    ? previous
+                    : {left: 0, width: 100});
+                return;
+            }
 
-        const width = Math.max(18, (el.clientWidth / el.scrollWidth) * 100);
-        const left = (el.scrollLeft / maxScroll) * (100 - width);
-        setScrollBar({left, width});
+            const width = Math.max(18, (el.clientWidth / el.scrollWidth) * 100);
+            const left = (el.scrollLeft / maxScroll) * (100 - width);
+            setScrollBar((previous) => previous.left === left && previous.width === width
+                ? previous
+                : {left, width});
+        });
     }, []);
 
     useEffect(() => {
         updateScrollBar();
         window.addEventListener("resize", updateScrollBar);
-        return () => window.removeEventListener("resize", updateScrollBar);
+        return () => {
+            window.removeEventListener("resize", updateScrollBar);
+            if (animationFrameRef.current !== null) {
+                cancelAnimationFrame(animationFrameRef.current);
+                animationFrameRef.current = null;
+            }
+        };
     }, [updateScrollBar, page, rowsPerPage, data.length]);
 
     const themed = (theme, light, dark) => theme.palette.type === "light" ? light : dark;

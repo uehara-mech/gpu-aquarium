@@ -7,10 +7,25 @@ const publicUrl = process.env.PUBLIC_URL || '';
 const demoPath = (path) => `${publicUrl}/demo-data/${path}`;
 
 const getJson = (url, config = {}) => axios.get(url, config);
+const demoRequests = new Map();
+
+// React StrictMode mounts effects twice in development. Share in-flight and
+// completed demo requests so that static JSON files are only fetched once.
+const getDemoJson = (path) => {
+    const url = demoPath(path);
+    if (!demoRequests.has(url)) {
+        const request = getJson(url).catch((error) => {
+            demoRequests.delete(url);
+            throw error;
+        });
+        demoRequests.set(url, request);
+    }
+    return demoRequests.get(url);
+};
 
 export const getMergedData = () => {
     if (isDemoMode) {
-        return getJson(demoPath('nodes/index.json')).then(async (res) => {
+        return getDemoJson('nodes/index.json').then(async (res) => {
             const nodeNames = Array.isArray(res.data) ? res.data : [];
             const nodes = await Promise.all(
                 nodeNames.map((nodeName) => getNodeData(nodeName).then((nodeRes) => [nodeName, nodeRes.data]))
@@ -34,10 +49,10 @@ export const getNodeData = (name, timestamp = null) => {
         const encodedName = encodeURIComponent(name);
         const encodedTimestamp = timestamp ? encodeURIComponent(timestamp) : null;
         if (encodedTimestamp) {
-            return getJson(demoPath(`logs/${encodedName}/${encodedTimestamp}.json`))
-                .catch(() => getJson(demoPath(`nodes/${encodedName}.json`)));
+            return getDemoJson(`logs/${encodedName}/${encodedTimestamp}.json`)
+                .catch(() => getDemoJson(`nodes/${encodedName}.json`));
         }
-        return getJson(demoPath(`nodes/${encodedName}.json`));
+        return getDemoJson(`nodes/${encodedName}.json`);
     }
 
     const url = timestamp
@@ -56,7 +71,7 @@ export const getNodeData = (name, timestamp = null) => {
 
 export const getHistoryLogs = (name) => {
     if (isDemoMode) {
-        return getJson(demoPath(`history/${encodeURIComponent(name)}.json`));
+        return getDemoJson(`history/${encodeURIComponent(name)}.json`);
     }
 
     return getJson(`${apiBaseUrl}/history/?n=${name}`);
@@ -64,7 +79,7 @@ export const getHistoryLogs = (name) => {
 
 export const getNodeStats = (name) => {
     if (isDemoMode) {
-        return getJson(demoPath(`node-stats/${encodeURIComponent(name)}.json`));
+        return getDemoJson(`node-stats/${encodeURIComponent(name)}.json`);
     }
 
     return getJson(`/node_stats/?n=${name}&_=${new Date().getTime()}`, {

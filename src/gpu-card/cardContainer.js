@@ -7,7 +7,7 @@ import {FilterState, gpuState, sortDirectionState, sortState} from "../atom/atom
 import GpuCard from './gpuCard';
 import {getMemoryTotal, StyledWarningAlert} from "../utils/utils";
 import {calcGpuStatus} from "./gpuDenseIcon";
-import {Box} from "@mui/material";
+import {Box, useMediaQuery, useTheme} from "@mui/material";
 
 const serverStatusCalculator = (serverData) => {
     let serverStatus = {
@@ -28,6 +28,10 @@ const createGpuCard = selector({
         const serverInfo = get(gpuState);
         const filterInfo = get(FilterState);
         const sortInfo = get(sortState)["fixed"];
+        const gpuFilter = new Set(filterInfo.gpu);
+        const memoryFilter = new Set(filterInfo.memory);
+        const cudaFilter = new Set(filterInfo.cuda);
+        const containerFilter = new Set(filterInfo.container);
 
         // sort serverInfo
         // first, copy serverInfo and convert to list
@@ -51,9 +55,12 @@ const createGpuCard = selector({
                     return 0;
                 });
             } else if (sortInfo === "gpu_usage") {
+                const statusByServer = new Map(
+                    serverInfoList.map((server) => [server, serverStatusCalculator(server)])
+                );
                 serverInfoList.sort((a, b) => {
-                    let aStatus = serverStatusCalculator(a);
-                    let bStatus = serverStatusCalculator(b);
+                    const aStatus = statusByServer.get(a);
+                    const bStatus = statusByServer.get(b);
 
                     // first priority of sort: "free" (descending)
                     // second priority of sort: "alert" (ascending)
@@ -84,7 +91,7 @@ const createGpuCard = selector({
             }
         }
 
-        const gpuCards = [];
+        const visibleServers = [];
         // serverInfo: dict of {name1: {...}, name2, {...}, ...}
         if (serverInfoList.length > 0) {
             for (let i = 0; i < serverInfoList.length; i++) {
@@ -97,15 +104,15 @@ const createGpuCard = selector({
                 let cudaVersions = eachServerInfo.basic_info.cuda_versions;
 
                 // filter server
-                if (filterInfo['gpu'].length > 0 && filterInfo['gpu'].includes(gpuName)) {
+                if (gpuFilter.size > 0 && gpuFilter.has(gpuName)) {
                     continue;
                 }
-                if (filterInfo['memory'].length > 0 && filterInfo['memory'].includes(memoryTotalStr)) {
+                if (memoryFilter.size > 0 && memoryFilter.has(memoryTotalStr)) {
                     continue;
                 }
                 // for cuda version, if filterInfo['cuda'] contains all cudaVersions, then skip
-                if (filterInfo['cuda'].length > 0) {
-                    let isSubset = cudaVersions.every(x => filterInfo['cuda'].includes(x));
+                if (cudaFilter.size > 0) {
+                    let isSubset = cudaVersions.every(x => cudaFilter.has(x));
                     if (isSubset) {
                         continue;
                     }
@@ -120,14 +127,14 @@ const createGpuCard = selector({
                 // -> if is_singularity_available is false, then skip
                 // 4. filterInfo['container'] = []
                 // -> show is_docker_available and is_singularity_available
-                if (filterInfo['container'].length > 0) {
-                    if (filterInfo['container'].includes("Docker") && filterInfo['container'].includes("Singularity")) {
+                if (containerFilter.size > 0) {
+                    if (containerFilter.has("Docker") && containerFilter.has("Singularity")) {
                         // do nothing
-                    } else if (!filterInfo['container'].includes("Docker")) {
+                    } else if (!containerFilter.has("Docker")) {
                         if (!eachServerInfo.basic_info.is_docker_available) {
                             continue;
                         }
-                    } else if (!filterInfo['container'].includes("Singularity")) {
+                    } else if (!containerFilter.has("Singularity")) {
                         if (!eachServerInfo.basic_info.is_singularity_available) {
                             continue;
                         }
@@ -138,19 +145,25 @@ const createGpuCard = selector({
                     }
                 }
 
-                gpuCards.push(
-                    <Box key={i} sx={{width: "100%", maxWidth: {xs: "100%", sm: 600}, minWidth: 0, display: "flex", justifyContent: "center", mx: "auto"}}>
-                        <GpuCard data={eachServerInfo}/>
-                    </Box>
-                );
+                visibleServers.push(eachServerInfo);
             }
         }
-        return [gpuCards, serverInfoList];
+        return [visibleServers, serverInfoList.length];
     }
 });
 
 export default function CardContainer(props) {
-    const [gpuCards, serverInfoList] = useRecoilValue(createGpuCard);
+    const [visibleServers, serverCount] = useRecoilValue(createGpuCard);
+    const theme = useTheme();
+    const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
+    const gpuCards = visibleServers.map((server) => (
+        <Box
+            key={server.basic_info.host_name}
+            sx={{width: "100%", maxWidth: {xs: "100%", sm: 600}, minWidth: 0, display: "flex", justifyContent: "center", mx: "auto"}}
+        >
+            <GpuCard data={server}/>
+        </Box>
+    ));
 
     const sortDirection = useRecoilValue(sortDirectionState)["fixed"];
     let leftGpuCards = [];
@@ -174,7 +187,7 @@ export default function CardContainer(props) {
     }
 
     const gpuContainer = () => {
-        if (serverInfoList.length > 0 && gpuCards.length === 0) {
+        if (serverCount > 0 && gpuCards.length === 0) {
             return (
                 <Box sx={{width: "100%", display: "flex", justifyContent: "center"}}>
                     <StyledWarningAlert severity="warning">
@@ -183,7 +196,7 @@ export default function CardContainer(props) {
                     </StyledWarningAlert>
                 </Box>
             );
-        } else if (serverInfoList.length === 0) {
+        } else if (serverCount === 0) {
             return (
                 <Box sx={{width: "100%", display: "flex", justifyContent: "center"}}>
                     <StyledWarningAlert severity="warning">
@@ -195,12 +208,12 @@ export default function CardContainer(props) {
         } else {
             return (
                 <Grid container justifyContent={"center"} sx={{px: {xs: 2, sm: 0}}}>
-                    <Grid item md={10} xs={12} sx={{display: {xs: "block", lg: "none"}, minWidth: 0}}>
+                    {!isDesktop && <Grid item md={10} xs={12} sx={{minWidth: 0}}>
                         <Box sx={{display: "grid", rowGap: 0, justifyItems: "center", paddingTop: "8px"}}>
                             {gpuCards}
                         </Box>
-                    </Grid>
-                    <Grid item lg={12} sx={{display: {xs: "none", lg: "block"}, minWidth: 0}}>
+                    </Grid>}
+                    {isDesktop && <Grid item lg={12} sx={{minWidth: 0}}>
                         <Box
                             sx={{
                                 display: "grid",
@@ -222,7 +235,7 @@ export default function CardContainer(props) {
                                 {rightGpuCards}
                             </Box>
                         </Box>
-                    </Grid>
+                    </Grid>}
                 </Grid>
             );
         }

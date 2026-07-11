@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 
 import {useParams} from "react-router-dom";
 import Grid from '@mui/material/Unstable_Grid2';
@@ -19,6 +19,12 @@ export default function NodeStats(props) {
     const { name } = useParams();
 
     const theme = useTheme();
+    const xaxis = useMemo(() => {
+        if (!nodeStats || !Array.isArray(nodeStats.timestamp)) {
+            return [];
+        }
+        return nodeStats.timestamp.map((dateItem) => new Date(dateItem * 1000));
+    }, [nodeStats]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -84,10 +90,6 @@ export default function NodeStats(props) {
 
         // xaxis: 0, 1, ... (length of nodeStats[0])
         // let xaxis = Array.from({length: nodeStats["timestamp"].length}, (_, i) => i);
-        let xaxis = nodeStats["timestamp"];
-        // convert unix timestamp to Date object
-        xaxis = xaxis.map((dateItem) => new Date(dateItem * 1000));
-
         let series = nodeStats[props.nodeName];
         // x1000 to convert to milliseconds
         series = series.map((sec) => sec * 1000);

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useMemo, useState } from 'react';
 
 const DataContext = createContext();
 
@@ -7,9 +7,10 @@ export const DataProvider = ({ children }) => {
         gpuDetails: null,
         cardContainerData: null
     });
+    const value = useMemo(() => ({ state, setState }), [state]);
 
     return (
-        <DataContext.Provider value={{ state, setState }}>
+        <DataContext.Provider value={value}>
             {children}
         </DataContext.Provider>
     );

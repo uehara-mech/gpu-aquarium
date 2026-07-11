@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { useParams, useLocation } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
@@ -8,12 +8,13 @@ import TopProcessTable from "./topProcessTable";
 import { Alert, AlertTitle, Box, Typography } from "@mui/material";
 import { StyledPaper } from "./common";
 import { LoadingCircle } from "../utils/utils";
-import NodeStats from "./nodeStats";
 import { useRecoilValue } from "recoil";
 import { betaFeatureState } from "../atom/atom";
 import { useData } from "../context";
 import {getNodeData} from "../api";
 import {Link} from "react-router-dom";
+
+const NodeStats = lazy(() => import("./nodeStats"));
 
 export default function GpuDetail() {
     const [nodeInfo, setNodeInfo] = useState(null);
@@ -186,7 +187,7 @@ export default function GpuDetail() {
                     <TopProcessTable processes={nodeInfo.process_info} />
                 </StyledPaper>
             </Stack>
-            {useBetaFeature && <NodeStats />}
+            {useBetaFeature && <Suspense fallback={<LoadingCircle />}><NodeStats /></Suspense>}
         </Stack>
     );
 }

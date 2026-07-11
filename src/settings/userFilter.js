@@ -9,14 +9,14 @@ const createUserFilterValuesList = selector({
     key: 'createUserFilterValuesList',
     get: ({ get }) => {
         const allData = get(gpuState);
-        let userNameList = [];
+        const userNames = new Set();
         for (let hostName in allData) {
-            // add all user names to userNameList
-            userNameList = userNameList.concat(allData[hostName].users);
+            const users = Array.isArray(allData[hostName].users) ? allData[hostName].users : [];
+            for (const userName of users) {
+                userNames.add(userName);
+            }
         }
-        // remove duplicate user names
-        userNameList = [...new Set(userNameList)];
-        return userNameList;
+        return [...userNames];
     }
 });
 

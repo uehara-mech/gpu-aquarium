@@ -33,7 +33,11 @@ export default function GpuContent(props) {
     return (
         <div>
             <Divider />
-            <Accordion elevation={0} sx={{backgroundColor: "transparent"}}>
+            <Accordion
+                elevation={0}
+                sx={{backgroundColor: "transparent"}}
+                TransitionProps={{unmountOnExit: true}}
+            >
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"

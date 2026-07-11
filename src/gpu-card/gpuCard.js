@@ -110,7 +110,7 @@ const PaperWithCorner = (props) => {
 };
 
 
-export default function GpuCard(props) {
+function GpuCard(props) {
     return (
         <Box sx={{width: "100%", maxWidth: {xs: "100%", sm: "600px"}, minWidth: 0, boxSizing: "border-box"}}>
             <PaperWithCorner
@@ -137,3 +137,5 @@ export default function GpuCard(props) {
         </Box>
     );
 }
+
+export default React.memo(GpuCard);

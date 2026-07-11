@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {lazy, Suspense, useEffect, useMemo, useState} from 'react';
 
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,7 +12,6 @@ import {RecoilRoot, useRecoilState, useRecoilValue} from "recoil";
 import {gpuState, themeState, showHiddenNodeState} from "./atom/atom";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import GpuDetail from "./gpu-details/gpuDetail";
 import SettingDialog from "./settings/settingDialog";
 import {getDesignTokens} from "./theme";
 import {LoadingCircle} from "./utils/utils";
@@ -22,6 +21,8 @@ import { useData, DataProvider } from './context'
 import DownloadButton from "./downloadButton";
 import {getMergedData} from "./api";
 
+const GpuDetail = lazy(() => import("./gpu-details/gpuDetail"));
+
 function App() {
     return (
         <RecoilRoot>
@@ -29,6 +30,25 @@ function App() {
         </RecoilRoot>
     )
 }
+
+const CardContainerWrapper = ({serverInfo, isLoading}) => {
+    const { setState } = useData();
+
+    useEffect(() => {
+        setState({
+            cardContainerData: serverInfo,
+            gpuDetails: null
+        });
+    }, [serverInfo, setState]);
+
+    if (serverInfo === null && isLoading) {
+        return <LoadingCircle />;
+    }
+    if (serverInfo === null) {
+        return <div />;
+    }
+    return <CardContainer />;
+};
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
     backgroundColor: theme.palette.info.main,
@@ -135,7 +155,7 @@ function Root() {
 
     const appTitle = process.env.REACT_APP_TITLE || 'AQUARIUM';
 
-    const theme = createTheme(getDesignTokens(themeValue));
+    const theme = useMemo(() => createTheme(getDesignTokens(themeValue)), [themeValue]);
     const toolbarSx = {
         px: {xs: 2, sm: 2},
         width: "100vw",
@@ -181,26 +201,6 @@ function Root() {
         return () => clearTimeout(timer);
     }, [showHiddenNode, setserverInfo]);
 
-    const CardContainerWrapper = () => {
-        const { setState } = useData();
-        useEffect(() => {
-            setState({
-                cardContainerData: serverInfo,
-                gpuDetails: null
-            });
-        }, [setState]);
-
-        if (serverInfo === null && isLoading) {
-            return (<LoadingCircle />)
-        } else if (serverInfo === null) {
-            return (<div />)
-        } else {
-            return (
-                <CardContainer />
-            )
-        }
-    }
-
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -211,8 +211,8 @@ function Root() {
                     </StyledAppBar>
                     <HeaderToolbar hidden appTitle={appTitle} toolbarSx={toolbarSx} />
                     <Routes>
-                        <Route path="/:name" element={<GpuDetail />} />
-                        <Route path="/" element={<CardContainerWrapper/>} />
+                        <Route path="/:name" element={<Suspense fallback={<LoadingCircle />}><GpuDetail /></Suspense>} />
+                        <Route path="/" element={<CardContainerWrapper serverInfo={serverInfo} isLoading={isLoading}/>} />
                     </Routes>
                 </HashRouter>
             </DataProvider>
